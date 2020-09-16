@@ -1,0 +1,16 @@
+<view class="shang">
+    <image class="shang_img" src="{{authorInfo.avatar}}"></image>
+    <view class="shang_name">{{authorInfo.realname?authorInfo.realname:authorInfo.nickname}}</view>
+    <view class="shang_text">鼓励一下 请我们喝杯咖啡</view>
+    <view class="shang_tit">打赏金额</view>
+    <view bindtap="shangPay" class="shang_list">
+        <button class="shang_item" data-rmb="1" plain="true" type="primary">1元</button>
+        <button class="shang_item" data-rmb="5" plain="true" type="primary">5元</button>
+        <button class="shang_item" data-rmb="10" plain="true" type="primary">10元</button>
+        <button class="shang_item" data-rmb="20" plain="true" type="primary">20元</button>
+        <button class="shang_item" data-rmb="50" plain="true" type="primary">50元</button>
+        <button class="shang_item" data-rmb="100" plain="true" type="primary">100元</button>
+    </view>
+    <view bindtap="qita" class="shang_more">其他金额</view>
+    <view class="shang_num">收到{{shang_num}}次打赏</view>
+</view>

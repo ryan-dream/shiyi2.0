@@ -1,0 +1,52 @@
+page {
+    font-size: 32rpx;
+}
+
+.topBox {
+    padding: 0 30rpx;
+}
+
+.white_bg {
+    background-color: #fff;
+}
+
+.subColor {
+    color: #ffbb29;
+}
+
+.totalProfit {
+    padding: 30rpx 0;
+    justify-content: space-between;
+}
+
+.proVal {
+    font-size: 44rpx;
+}
+
+.proBox .sub {
+    padding: 50rpx 0;
+}
+
+.ruleBox {
+    padding: 20rpx 0;
+    text-align: justify;
+}
+
+.txBtnBox {
+    background-color: #fff;
+    padding: 40rpx;
+}
+
+.txBtn {
+    color: #fff;
+    background-color: #07bb45;
+}
+
+.txBtn::after {
+    width: 0;
+    height: 0;
+}
+
+.txBtn:active {
+    opacity: 0.85;
+}

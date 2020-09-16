@@ -1,0 +1,24 @@
+<import src="../../../resource/wxParse/wxParse.wxml"></import>
+<view bindscroll="scroll" class="page-scroll" onReachBottom="getMore" scrollTop="{{scrollTop}}" scrollY="true">
+    <view class="Chapter">
+        <view class="ChapterMin p15">
+            <text class="f20">第{{datum.displayorder}}章 {{datum.title}}</text>
+            <view class="info mt15 inforpadding">
+                <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+            </view>
+            <view class="conBtn flex hi40 tc">
+                <text class="sub" wx:if="{{datum.displayorder==1}}">第一章</text>
+                <text bindtap="section" class="sub" data-displayorder="0" wx:else>上一章</text>
+                <text bindtap="linkto" class="sub">目录</text>
+                <text class="sub" wx:if="{{datum.displayorder==total}}">尾章</text>
+                <text bindtap="section" class="sub" data-displayorder="1" wx:else>下一章</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
+    <view bindtap="goTop" class="gotop-wrap">
+        <view bindtap="goTop" class="icon icon-top"></view>
+        <view bindtap="goTop">顶部</view>
+    </view>
+</view>

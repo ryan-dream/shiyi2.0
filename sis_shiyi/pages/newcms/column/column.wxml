@@ -1,0 +1,164 @@
+<view class="tabbar_top" style="--color:{{color}};">
+  <view class="column pr">
+    <!-- <view>
+      <view bindtap="index" class="homeH global">
+        <view bindtap="index" class="home global">
+          <icon class="iconfont icon-shouye iconsize"></icon>
+        </view>
+      </view>
+    </view> -->
+    <view bindtap="index" class="fixedHome">
+    <view class="fixedBg"></view>
+    <image class="fixedIcon" src="../../../resource/images/artposter/home_s.png"></image>
+</view>
+    <view class="b_g global"></view>
+    <view class="columnHeaer p10">
+      <view class="bWhite Min overflow bd8">
+        <view class="info flex">
+          <view class="img imgWh bd3 overflow">
+            <image mode="aspectFill" src="{{datum.serialize.serialize_img}}"></image>
+          </view>
+          <view class="infoR sub ml15">
+            <text class="f16 lineText disb">{{datum.serialize.serialize_title}}</text>
+            <text class="linght lineText disb f12">{{datum.serialize.author_nickname}}</text>
+            <view class="Book flex-jb">
+              <text class="linght author lineText f12" wx:if="{{datum.serialize.ser_type==1}}">{{datum.serialize.pcate?datum.serialize.pcate:''}}/{{datum.serialize.ccate?datum.serialize.ccate:''}}</text>
+              <text class="linght author lineText f12" wx:if="{{datum.serialize.ser_type==2}}">文章类专栏</text>
+              <text class="size f20" wx:if="{{datum.serialize.serialize_price>0&&is_pay&&ios!=1}}">￥{{datum.serialize.serialize_price}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="conBtn  tc mt15 flex">
+          <block wx:if="{{datum.serialize.serialize_price>0&&is_pay}}">
+            <text class="disb bg global sub" wx:if="{{member>0||mypay}}">{{member==1?'会员已购买':'已购买'}}</text>
+            <block wx:if="{{ios==0}}">
+              <text bindtap="pay" class="disb sub" wx:if="{{member==0&&!mypay}}">购买</text>
+            </block>
+            <block wx:if="{{ios!=0}}">
+              <text bindtap="iosbuy" class="disb sub" wx:if="{{member==0&&!mypay}}">购买</text>
+            </block>
+          </block>
+          <block wx:else></block>
+          <text bindtap="collect" class="disb {{collect?'bg global':''}} sub" data-types="{{collect?5:6}}">{{collect?'已收藏':'收藏'}}</text>
+        </view>
+        <block wx:if="{{datum.serialize.ser_type!=2}}">
+          <view class="infoIn mt15 pt5 mb30 pr">
+            <text bindtap="serialize_desc_show" class="disb text {{serialize_desc_show?'heiAuto':''}}" id="mjltest">{{datum.serialize.serialize_desc}}</text>
+            <view bindtap="serialize_desc_show" class="have-haircut-up {{serialize_desc_show?'have-haircut-arrows':''}}"></view>
+          </view>
+          <view bindtap="linkto" class="CatalogL hi46 arrowR  mt15" data-member="{{datum.member}}" data-mypay="{{datum.mypay}}" data-name="{{datum.serialize.serialize_title}}" data-url="../Catalog/Catalog" wx:if="{{datum.column&&is_pay}}">
+            <navigator class="clearfix" hoverClass="hover" url="/pages/newcms/Catalog/Catalog">
+              <text class="mr15 f16" style="float:left;">目录</text>
+              <text class="line-text linght lineUpdate" style="float:left;">更新至 第{{datum.column.displayorder}}章 {{datum.column.title}}</text>
+            </navigator>
+          </view>
+          <view class="CatalogL hi46 arrowR  mt15" wx:else>
+            <navigator hoverClass="hover" url="/pages/newcms/Catalog/Catalog">
+              <text class="mr20 f16">目录</text>
+              <text class="line-text tr pr10 linght">暂无更新</text>
+            </navigator>
+          </view>
+        </block>
+      </view>
+      <view class="review bd8 bWhite mt10" wx:if="{{datum.serialize.ser_type!=2}}">
+        <view class="tit pl15 pr15 hi46 flex-jb gridXb">
+          <view class="reviewTitL flex">
+            <text class="f16">书评区</text>
+            <text class="f14 linght ml5">{{datum.total}}条评论</text>
+          </view>
+          <view catchtap="tk" class="reviewTitR f14 grey flex tr">
+            <text class="mr5">发表书评</text>
+            <text class="iconfont icon-bianji"></text>
+          </view>
+        </view>
+        <view class="reviewMin">
+          <block wx:if="{{datum.total>0}}">
+            <view class="reviewMinLi  gridXb p15" wx:for="{{comment}}">
+              <navigator class="flex">
+                <view class="img imgWh40 overflow">
+                  <image mode="aspectFill" src="{{item.avatar}}"></image>
+                </view>
+                <view class="info sub ml15">
+                  <view class="infoJB flex-jb">
+                    <text class="f18">{{item.nickname}}</text>
+                  </view>
+                  <text class="time f12 linght disb">{{item.createtime}}</text>
+                  <text class="f14 mt5 disb">{{item.discuss}}</text>
+                  <view class="author-reply" wx:if="{{item.reply}}">
+                    <view class="author-reply-tit">作者回复</view>
+                    <view>{{item.reply}}</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+            <view class="noInfo tc pb15" wx:if="{{!ismore}}">
+              <text class="iconfont icon-meiyougengduo disb"></text>
+              <text class="linght disb f12">没有更多啦~</text>
+            </view>
+          </block>
+          <view class="noInfo tc pb15" wx:else>
+            <text class="iconfont icon-meiyougengduo disb"></text>
+            <text class="linght disb f12">暂无评论信息~</text>
+          </view>
+        </view>
+      </view>
+      <view class="Elastic" wx:if="{{tk}}">
+        <view class="ElasticMin w100 bWhite pabbl">
+          <view catchtap="tk" class="close" style="border-color: {{color}} {{color}} transparent transparent;">
+            <text class="iconfont icon-2 f20"></text>
+          </view>
+          <view class="tit f18">发表文章评论</view>
+          <form bindsubmit="formSubmit" reportSubmit="true">
+            <view class="info p10">
+              <view class="textarea mb20">
+                <textarea class="w100 p15" name="content" placeholder="请输入您要发表的评论，待管理员审核后方可显示~"></textarea>
+              </view>
+              <view class="btn mt20 mb20">
+                <button class="global" formType="submit" type="primary">提交</button>
+              </view>
+            </view>
+          </form>
+        </view>
+      </view>
+      <view class="module_box" wx:if="{{datum.serialize.ser_type==2}}">
+        <view class="module_title">
+          <view catchtap="listOrDes" class="module_name {{lOrd==2?'module_active':''}}" data-tp="2">简 介</view>
+          <view catchtap="listOrDes" class="module_name {{lOrd==1?'module_active':''}}" data-tp="1">目 录</view>
+        </view>
+        <block wx:if="{{lOrd==1}}">
+          <view class="article_list">
+            <view catchtap="goArtDetails" class="article_item" data-artid="{{item.artid}}" wx:for="{{serAetList}}">
+              <image class="community_img" src="{{item.thumb}}"></image>
+              <view class="community_text flex-column">
+                <view class="community_name lineText2">{{item.title}}</view>
+                <view class="community_det flex-row">
+                  <view class="community_det_num flex-row">
+                    <view class="community_det_">{{item.typesName}}</view>
+                    <view class="community_det_viewision"> | </view>
+                    <view class="community_det_">{{item.clickNum}}人喜欢</view>
+                  </view>
+                  <view class="community_det_price" wx:if="{{ios!=1&&is_pay}}">{{item.pay_money>0?'￥'+item.pay_money:'免费'}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="noInfo tc pb15" wx:if="{{!ismore}}">
+            <text class="iconfont icon-meiyougengduo disb"></text>
+            <text class="linght disb f12">没有更多啦~</text>
+          </view>
+        </block>
+        <block wx:if="{{lOrd==2}}">
+          <import src="../../../resource/wxParse/wxParse.wxml"></import>
+          <import src="../../../resource/wxParse/wxParse.wxss"></import>
+          <view class="serDes" >
+            <template is="wxParse" data="{{wxParseData:serialize_desc_2.nodes}}"></template>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="dim-text" style="display:none;">
+      <view class="dim-text-box">拾一英语</view>
+      <view class="dim-text-ceng"></view>
+    </view>
+  </view>
+</view>

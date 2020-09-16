@@ -1,0 +1,29 @@
+.blue {
+    color: #10aeff;
+}
+
+page {
+    background: #fff;
+}
+
+.success {
+    padding: 140rpx 15rpx;
+}
+
+.wancheng {
+    width: 375rpx;
+    border-radius: 50rpx;
+    border: 1rpx solid;
+    line-height: 78rpx;
+    margin: 260rpx auto 20rpx;
+    font-size: 14px;
+    margin-top: -10rpx;
+}
+
+.wancheng::after {
+    border: 0;
+}
+
+.wancheng.button-hover {
+    background-color: rgba(16,174,255,0.1);
+}

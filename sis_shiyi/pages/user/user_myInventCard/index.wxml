@@ -1,0 +1,9 @@
+<view bindtap="tradelog" class="inventBtn"> 我的邀请</view>
+<image bindtap="Image" class="inventPic" mode="aspectFill" src="{{img}}"></image>
+<scroll-view scrollX class="scrollView">
+    <view bindtap="fximg" class="suoPicBox" data-id="{{item.ps_id}}" wx:for="{{datum}}">
+        <image class="suoPic" mode="aspectFill" src="{{item.bg}}" wx:if="{{index==0}}"></image>
+        <image class="suoPic" mode="aspectFill" src="{{attachurl}}{{item.bg}}" wx:else></image>
+        <view class="{{show==item.ps_id?'radio':''}}" data-id="{{item.ps_id}}"></view>
+    </view>
+</scroll-view>

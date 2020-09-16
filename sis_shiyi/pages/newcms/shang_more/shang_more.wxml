@@ -1,0 +1,10 @@
+<view class="shang">
+    <image class="shang_img" src="{{authorInfo.avatar}}"></image>
+    <view class="shang_name">给 {{authorInfo.realname?authorInfo.realname:authorInfo.nickname}}  打赏</view>
+    <view class="inp_box">
+        <view>￥：</view>
+        <input bindblur="rmbValue" placeholder=" 0 " type="number"></input>
+        <view class="inp_box_right">元</view>
+    </view>
+    <view bindtap="shangPay" class="zan_btn">打赏</view>
+</view>

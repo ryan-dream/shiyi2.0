@@ -1,0 +1,69 @@
+<view class="tabbar_top" style="--color:{{color}};">
+  <view>
+    <view bindtap="index" class="homeH global">
+      <view bindtap="index" class="home global">
+        <icon class="iconfont icon-shouye iconsize"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="topBox tc flex iconglobal">
+    <view bindtap="change" class="sub {{change?'global ':''}}">热门专栏</view>
+    <view bindtap="change" class="sub {{change==false?'global':''}}">热门文章</view>
+  </view>
+  <view class="list" wx:if="{{datum_a.length>0||datum_s.length>0}}">
+    <block wx:if="{{change}}">
+      <view bindtap="detail" class="item flex gridXb" data-id="{{item.id}}" data-type="2" data-url="../../newcms/column/column" wx:for="{{datum_s}}">
+                <image class="artPic mr10" mode="aspectFill" src="{{item.thumb?item.thumb:item.serialize_img}}"></image>
+                <view class="sub">
+                    <view class="f16 lineText">{{item.title?item.title:item.serialize_title}}</view>
+                    <view class="lineText f12 grey">{{item.ser_type!=2?item.description?item.description:item.serialize_desc:''}}</view>
+                    <view class="itemBot mt10 grey flex">
+                        <view class="NewiconLi grey lineText iconfont icon-zuozhe" wx:if="{{item.author||item.author_nickname}}">{{item.author?item.author:item.author_nickname}}
+                            </view>
+                        <view class="NewiconLi iconfont icon-yanjing">{{item.clickNum?item.clickNum:item.sclickNum}}</view>
+                        <view class="NewiconLi iconfont icon-dianzan" wx:if="{{item.zanNum}}">{{item.zanNum}}</view>
+                        <view class="NewiconLi iconfont icon-icon_jiage_normal red" wx:if="{{(item.pay_money>0||item.serialize_price>0)&&is_pay}}">{{item.pay_money?item.pay_money:item.serialize_price}}</view>
+                    </view>
+                </view>
+            </view>
+      <view class="noInfo tc pb15">
+        <text class="iconfont icon-meiyougengduo disb"></text>
+        <text class="linght disb f16">{{loader_a?loader_a:'我是底线'}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view bindtap="detail" class="item flex gridXb" data-id="{{item.id}}" data-type="{{item.thumb?1:2}}" data-url="../../newcms/detail/index" wx:if="{{(item.types==3||item.types==4)&&is_pay||item.types==1||item.types==2}}" wx:for="{{datum_a}}">
+        <view class="imgWh mr10">
+          <image class="artPic" mode="aspectFill" src="{{item.thumb?item.thumb:item.serialize_img}}"></image>
+          <view class="imgWh-ceng" style="display:block" wx:if="{{(item.types==3||item.types==4)&&item.thumb}}">
+            <icon class="iconfont icon-bofang3 iconfsize"></icon>
+          </view>
+        </view>
+        <view class="sub flex flexC">
+          <view class="sub">
+            <view class="f16 lineText2">{{item.title?item.title:item.serialize_title}}</view>
+            <view class="lineText f12 grey">{{item.description?item.description:item.serialize_desc}}</view>
+          </view>
+          <view class="itemBot mt10 grey flex">
+            <view class="NewiconLi grey lineText iconfont icon-zuozhe" wx:if="{{item.author||item.author_nickname}}">{{item.author?item.author:item.author_nickname}}
+            </view>
+            <view class="NewiconLi iconfont icon-yanjing">{{item.clickNum?item.clickNum:item.sclickNum}}</view>
+            <view class="NewiconLi iconfont icon-dianzan" wx:if="{{item.zanNum}}">{{item.zanNum}}</view>
+            <view class="NewiconLi  iconfont icon-icon_jiage_normal red" wx:if="{{(item.pay_money>0||item.serialize_price>0)&&is_pay}}">{{item.pay_money?item.pay_money:item.serialize_price}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="noInfo tc pb15">
+        <text class="iconfont icon-meiyougengduo disb"></text>
+        <text class="linght disb f16">{{loader_s?loader_s:'我是底线'}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="m15" wx:else>
+    <view class="noInfo tc pb15">
+      <text class="iconfont icon-meiyougengduo disb"></text>
+      <text class="linght disb f16">{{hint?hint:'努力加载中...'}}</text>
+    </view>
+  </view>
+</view>

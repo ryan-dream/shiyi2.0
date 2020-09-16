@@ -1,0 +1,14 @@
+<import src="../../template/tabbar/tabbar.wxml"></import>
+<view>
+    <block wx:for="{{nav.father}}" wx:for-item="v">
+        <view class="title flex">
+            <view class="line"></view>
+            <view bindtap="active" class="titCon" data-id="{{v.id}}" data-type="1">{{v.name}}</view>
+            <view class="line lineRg"></view>
+        </view>
+        <view class="list ">
+            <view bindtap="active" class="item {{item.mb_strlen>7?'twoLine':''}}" data-id="{{item.id}}" data-type="2" wx:for="{{nav.children[ v['id'] ]}}">{{item.name}}</view>
+        </view>
+    </block>
+    <template is="tabbar" data="{{index_t:2,tabbar:tabbar,tabbarcolor:tabbarcolor,textcolor:textcolor}}"></template>
+</view>

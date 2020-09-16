@@ -1,0 +1,40 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <view class="Catalog pr">
+        <view class="bg global iconglobal"></view>
+        <view bindtap="index" class="homeH  global">
+            <view bindtap="index" class="home">
+                <icon class="iconfont icon-shouye iconsize"></icon>
+            </view>
+        </view>
+        <view class="CatalogHeaer p10">
+            <view class="bWhite Min bd8 overflow pr">
+                <view class="CatalogOrder hi40 tc  pl15 pr15">
+                    <text class="f18">{{name}}列表</text>
+                    <text bindtap="inverted" class="pabtr grey">{{positive}}</text>
+                </view>
+                <view class="CatalogMin pl15 pr15">
+                    <block wx:for="{{datum}}">
+                        <view class="CatalogLi gridXb" wx:if="{{member>0||mypay}}">
+                            <navigator class="arrowR right-more" hoverClass="hover" url="../Chapter/Chapter?id={{item.id}}&displayorder={{item.displayorder}}&sid={{id}}&total={{total}}&name={{name}}">
+                                    {{item.displayorder}}.{{item.title}}
+                                </navigator>
+                        </view>
+                        <block wx:else>
+                            <view class="CatalogLi gridXb" wx:if="{{item.displayorder-1<=free_chapter}}">
+                                <navigator class="arrowR right-more" hoverClass="hover" url="../Chapter/Chapter?id={{item.id}}&displayorder={{item.displayorder}}&sid={{id}}&total={{total}}&name={{name}}">
+                                    {{item.displayorder}}.{{item.title}}
+                                </navigator>
+                            </view>
+                            <view bindtap="pay" class="CatalogLi gridXb grey" wx:else>
+                                <navigator class="arrowR right-more" hoverClass="hover">
+                                    {{item.displayorder}}.{{item.title}}
+                                    <text class="iconfont icon-suo ml20 f24"></text>
+                                </navigator>
+                            </view>
+                        </block>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

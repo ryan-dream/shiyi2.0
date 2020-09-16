@@ -1,0 +1,105 @@
+page {
+    background: #f1f1f1;
+}
+
+.shang {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shang_img {
+    width: 120rpx;
+    height: 120rpx;
+    margin-top: 40rpx;
+}
+
+.shang_name {
+    font-size: 30rpx;
+    margin-top: 20rpx;
+}
+
+.da_num {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40rpx;
+}
+
+.pnumber {
+    font-size: 70rpx;
+    font-weight: 700;
+}
+
+.inp_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+    padding: 30rpx;
+    width: 90%;
+    margin: 40rpx 0;
+    box-sizing: border-box;
+}
+
+.inp_box input {
+    width: 85%;
+    text-align: right;
+}
+
+.inp_box_right {
+    margin-left: 20rpx;
+}
+
+.liuyan {
+    width: 90%;
+    height: 150rpx;
+    background: #fff;
+    padding: 30rpx;
+    box-sizing: border-box;
+}
+
+.choose_me {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 40rpx;
+    padding-left: 5%;
+    box-sizing: border-box;
+}
+
+.zan_btn {
+    width: 420rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    color: #fff;
+    background: #dfb741;
+    border-radius: 10rpx;
+    margin-top: 300rpx;
+}
+
+checkbox .wx-checkbox-input {
+    border-radius: 50%;
+    width: 40rpx;
+    height: 40rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+    background: #4dc544;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+    border-radius: 50%;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #fff;
+    background: transparent;
+    transform: translate(-50%,-50%) scale(1);
+}

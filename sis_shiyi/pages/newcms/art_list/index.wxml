@@ -1,0 +1,94 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <view>
+        <view bindtap="index" class="homeH global">
+            <view bindtap="index" class="home global">
+                <icon class="iconfont icon-shouye iconsize"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="top-search-box global">
+        <form bindsubmit="formSubmit">
+            <view class="top-search flex  global">
+                <view class="search-inp sub flex">
+                    <input class="sub mr10" name="title" placeholder="请输入关键词" value="{{title}}"></input>
+                    <button class="iconfont icon-icon117 search-btn" formType="submit"></button>
+                </view>
+            </view>
+        </form>
+    </view>
+    <view class="floatBox screen-box" wx:if="{{tk}}">
+        <view class="screen-cont flex flexC">
+            <view class="f18 tc p15">筛选</view>
+            <view class="screen-sort sub">
+                <view class="mb15" wx:for="{{nav.father}}" wx:for-item="v">
+                    <view>{{v.name}}</view>
+                    <view>
+                        <text bindtap="active" class="screen-tag active" data-cid="all" data-fid="{{v.id}}" wx:if="{{cid[v.id]=='noundefined'}}">全部</text>
+                        <text bindtap="active" class="{{cid[v.id].length==nav.children[v.id].length&&cid[v.id]!=undefined?'screen-tag active':'screen-tag '}}" data-cid="all" data-fid="{{v.id}}" wx:else>全部</text>
+                        <text bindtap="active" class="{{cid[v.id][item.id]?'screen-tag active':'screen-tag '}}" data-cid="{{item.id}}" data-fid="{{v.id}}" wx:for="{{nav.children[ v['id'] ]}}">{{item.name}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="flex screen-endbtn">
+                <button bindtap="search" class="sub" type="primary">完成</button>
+                <button bindtap="unset" class="sub reset-btn" type="default">重置</button>
+            </view>
+        </view>
+        <view class="floatBox floatBoxBg"></view>
+    </view>
+    <view class="m15" wx:if="{{datum.length>0}}">
+        <block wx:for="{{datum}}">
+            <view bindtap="detail" class="art-item flex gridXb" data-appoint="{{item.appoint}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="1" data-url="../detail/index" wx:if="{{types==1||types==3||types==4||types==6||types==7}}">
+                <view class="art-img mr10 imgWh">
+                    <image mode="aspectFill" src="{{item.thumb}}"></image>
+                    <view class="imgWh-ceng" style="display:block" wx:if="{{(item.types==3||item.types==4)&&item.thumb}}">
+                        <icon class="iconfont icon-bofang3 iconfsize"></icon>
+                    </view>
+                </view>
+                <view class="sub flex flexC">
+                    <view class="sub">
+                        <view class="lineText2 height">{{item.title?item.title:''}}</view>
+                        <view class="lineText f14 grey">{{item.description}}</view>
+                    </view>
+                    <view class="f12 flex grey art-othermsg">
+                        <view class="art-mgg-item lineText" wx:if="{{item.author}}">
+                            <text class="f14 iconfont icon-zuozhe"></text> {{item.author}}</view>
+                        <view class="art-mgg-item" wx:if="{{item.clickNum}}">
+                            <text class="f14 iconfont icon-yanjing"></text> {{item.clickNum}}</view>
+                        <view class="art-mgg-item" wx:if="{{item.zanNum}}">
+                            <text class="f14 iconfont icon-dianzan"></text> {{item.zanNum}}</view>
+                        <view class="iconfont icon-icon_jiage_normal art-mgg-item f14 red" wx:if="{{item.pay_money>0&&is_pay}}">{{item.pay_money}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="detail" class="art-item flex gridXb" data-appoint="{{item.appoint}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="2" data-url="../column/column" wx:else>
+                <view class="art-img mr10">
+                    <image mode="aspectFill" src="{{item.serialize_img}}"></image>
+                </view>
+                <view class="sub flex flexC">
+                    <view class="sub">
+                        <view class="lineText2">{{item.serialize_title}}</view>
+                        <view class="lineText f14 grey">{{item.ser_type!=2?item.serialize_desc:''}}</view>
+                    </view>
+                    <view class="f12 flex grey art-othermsg">
+                        <view class="art-mgg-item lineText">
+                            <text class="f14 iconfont icon-zuozhe"></text> {{item.author_nickname}}</view>
+                        <view class="art-mgg-item">
+                            <text class="f14 iconfont icon-yanjing"></text> {{item.clickNum}}</view>
+                        <view class="iconfont icon-icon_jiage_normal art-mgg-item f14 red" wx:if="{{item.serialize_price>0&&is_pay}}">{{item.serialize_price}}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class="noInfo tc pb15" wx:if="{{!ismore}}">
+            <text class="iconfont icon-meiyougengduo disb"></text>
+            <text class="linght disb f14">没有更多啦^_^</text>
+        </view>
+    </view>
+    <view class="m15" wx:else>
+        <view class="noInfo tc pb15">
+            <text class="iconfont icon-meiyougengduo disb"></text>
+            <text class="linght disb f16">{{hint?hint:'努力加载中...'}}</text>
+        </view>
+    </view>
+</view>

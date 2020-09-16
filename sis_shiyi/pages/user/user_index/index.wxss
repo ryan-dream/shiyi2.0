@@ -1,0 +1,308 @@
+@import "../../../../wuBaseWxss/0.wxss";
+
+.title {
+    align-items: center;
+    justify-content: center;
+    margin-top: 40rpx;
+}
+
+.line {
+    position: relative;
+    width: 60rpx;
+    height: 2rpx;
+    background-color: #b5b5b5;
+}
+
+.line::before {
+    content: '';
+    position: absolute;
+    right: -8rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8rpx;
+    height: 8rpx;
+    border-radius: 50%;
+    border: 2rpx solid #B5B5B5;
+}
+
+.lineRg::before {
+    left: -8rpx;
+}
+.my::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 20vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.titCon {
+    margin: 0 30rpx;
+    color: #666;
+    font-size: 30rpx;
+    border-radius: 8rpx;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.titCon:active {
+    color: #fff;
+    background-color: #07bb45;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 20vh;
+    background: #07bb45;
+    top: 0;
+    left: 0;
+}
+
+page {
+    background: #f6f6f6;
+}
+
+.my .myHeader {
+    margin-top: -210rpx;
+}
+
+.my .myHeaderMin {
+    padding: 30rpx 30rpx 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.my .myHeaderMin .info text {
+    line-height: 108rpx;
+}
+
+.info-nick {
+    line-height: 108rpx;
+}
+
+.my .myHeaderMin .img {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.my .myVip {
+    display: flex;
+    align-items: center;
+}
+
+.my .myVipIn {
+    vertical-align: bottom;
+}
+
+.my .myVip .btn {
+    background: #07bb45;
+    color: #fff;
+    width: 140rpx;
+    padding: 10rpx 0;
+}
+
+.my .myVip .btn2 {
+    background: #07bb45;
+    color: #fff;
+    width: 300rpx;
+    padding: 10rpx 0;
+    margin-top: 16rpx;
+}
+
+.my .myUl {
+    flex-wrap: wrap;
+}
+
+.my .myUl .myLi {
+    width: 33.3%;
+    float: left;
+}
+
+.my .myVipIn .iconfont {
+    vertical-align: bottom;
+    color: #07bb45;
+}
+
+.my .myLi:active {
+    background: rgba(0,0,0,0.05);
+}
+
+button.shenqing-author-btn {
+    font-size: inherit;
+    background: transparent;
+    padding: 0;
+    line-height: inherit;
+    color: inherit;
+}
+
+button.shenqing-author-btn::after {
+    display: none;
+}
+
+.button-hover[type="primary"] {
+    background: #f1f1f1;
+    color: #2a2a2a;
+}
+
+.display_hide {
+    display: none;
+}
+
+.shade_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.innerBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    background-color: #fff;
+    padding: 30rpx;
+    border-radius: 10rpx;
+}
+
+.closeBtn {
+    position: absolute;
+    right: -15rpx;
+    top: -15rpx;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 5rpx 5rpx 10rpx rgba(0,0,0,0.5);
+}
+
+.closeBtn::before,.closeBtn::after {
+    content: '';
+    position: absolute;
+    width: 30rpx;
+    height: 2rpx;
+    background-color: #666;
+    top: 19rpx;
+    right: 5rpx;
+}
+
+.closeBtn::before {
+    transform: rotate(45deg);
+}
+
+.closeBtn::after {
+    transform: rotate(-45deg);
+}
+
+.closeBtn:active {
+    opacity: 0.6;
+}
+
+.radioBox {
+    padding: 10rpx;
+    margin: 10rpx 0;
+    word-break: break-all;
+}
+
+.radioBox2 {
+    padding: 10rpx;
+    margin: 10rpx 0;
+    word-break: break-all;
+}
+
+.radioBox2:active {
+    background: #c3fdd7;
+    color: #333;
+    border-radius: 12rpx;
+}
+
+.label {
+    display: inline-block;
+    width: 50%;
+    padding: 10rpx 0;
+}
+
+.wx-radio-input {
+    transform: scale(0.8,0.8);
+}
+
+.countBox {
+    padding: 50rpx 100rpx;
+    justify-content: space-around;
+}
+
+.count {
+    position: relative;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    border: 2rpx solid #888;
+}
+
+.increase::before,.increase::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 2rpx);
+    right: calc(50% - 12rpx);
+    width: 24rpx;
+    height: 4rpx;
+    background-color: #888;
+}
+
+.increase::before {
+    transform: rotate(90deg);
+}
+
+.decrease {
+    position: relative;
+}
+
+.decrease::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 2rpx);
+    right: calc(50% - 12rpx);
+    width: 24rpx;
+    height: 4rpx;
+    background-color: #888;
+}
+
+.submitBtn {
+    color: #fff;
+    font-size: 32rpx;
+    line-height: 70rpx;
+    background-color: #07bb45;
+}
+
+.submitBtn::after {
+    width: 0;
+    height: 0;
+}
+
+.submitBtn:active {
+    opacity: 0.85;
+}
+
+.name_button {
+    float: right;
+    margin-top: -74rpx;
+    margin-right: 80rpx;
+}
+
+.apw {
+    height: 60rpx;
+    line-height: 60rpx;
+    width: 200rpx;
+    margin-left: 10rpx;
+    margin-bottom: 5rpx;
+    border-radius: 40rpx;
+    color: white;
+    background-color: var(--color)!important;
+}

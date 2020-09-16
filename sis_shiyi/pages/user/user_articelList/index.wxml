@@ -1,0 +1,41 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <view class="list">
+        <view class="item flex gridXb" wx:for="{{datum}}">
+            <image bindtap="detail" class="artPic mr10" data-authorid="{{item.author_id}}" data-id="{{item.id?item.id:item.sid}}" data-title="{{item.serialize_title}}" data-type="{{item.thumb?1:2}}" data-url="../../newcms/detail/index" mode="aspectFill" src="{{item.thumb?item.thumb:item.serialize_img}}"></image>
+            <view bindtap="detail" class="sub flex flexC" data-id="{{item.id?item.id:item.sid}}" data-title="{{item.serialize_title}}" data-type="{{item.thumb?1:2}}" data-url="../../newcms/detail/index">
+                <view class="sub">
+                    <view class="f16 lineText2">{{item.title?item.title:item.serialize_title}}</view>
+                </view>
+                <view class="itemBot grey flex">
+                    <view class="NewiconLi grey  lineText iconfont icon-zuozhe" wx:if="{{item.author||item.author_nickname}}">{{item.author?item.author:item.author_nickname}}
+                        </view>
+                    <view class="NewiconLi iconfont icon-yanjing">{{item.clickNum?item.clickNum:item.sclickNum}}</view>
+                    <view class="NewiconLi iconfont icon-dianzan" wx:if="{{item.zanNum}}">{{item.zanNum}}</view>
+                    <view class="NewiconLi  iconfont icon-icon_jiage_normal red" wx:if="{{item.pay_money>0||item.serialize_price>0}}">{{item.pay_money?item.pay_money:item.serialize_price}}</view>
+                </view>
+            </view>
+            <view bindtap="artEditWay" class="edit gridFour global" data-canpc="{{item.canpc}}" data-id="{{item.id}}" data-types="{{item.types}}" data-way="open" wx:if="{{pcart==1}}">
+                <text class="iconfont icon-edit ">编辑</text>
+            </view>
+            <view bindtap="linkto" class="edit gridFour global" data-id="{{item.id}}" wx:if="{{item.type==2&&pcart!=1}}">
+                <text class="iconfont icon-edit ">编辑</text>
+            </view>
+        </view>
+    </view>
+    <view class="shade_bg" wx:if="{{art_edit_way}}">
+        <view class="innerBox tc">
+            <view bindtap="artEditWay" class="closeBtn" data-way="close"></view>
+            <view class="payVal">请选择编辑方式</view>
+            <view class="radioBox gridXb">
+                <radio-group>
+                    <label bindtap="artEditWayTrue" class="label apw" id="mob">移动端编辑</label>
+                    <label bindtap="artEditWayTrue" class="label apw" id="pc">
+                        <text space="nbsp">PC  端编辑</text>
+                    </label>
+                </radio-group>
+                <input cursorSpacing="45" disabled="true" placeholder="PC端发布,建议选择 PC端 编辑" style="margin-top:10rpx;" wx:if="{{tp==1}}"></input>
+                <input cursorSpacing="45" disabled="true" placeholder="建议选择 移动端 编辑" style="margin-top:10rpx;" wx:else></input>
+            </view>
+        </view>
+    </view>
+</view>

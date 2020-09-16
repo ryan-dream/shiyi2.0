@@ -1,0 +1,149 @@
+<import src="../../template/tabbar/tabbar.wxml"></import>
+<view class="tabbar_top" style="--color:{{color}};">
+    <view class="my">
+        <view class="bg global"></view>
+        <view class="myHeader pr overflow p10">
+            <view class="myHeaderMin bWhite bd8">
+                <view class="info arrowR">
+                    <navigator class="flex" hoverClass="hover" url="../user_edit/index?id={{userInfo.id}}">
+                        <view class="img overflow">
+                            <open-data type="userAvatarUrl"></open-data>
+                        </view>
+                        <view class="f18 ml10 info-nick">
+                            <open-data type="userNickName"></open-data>
+                        </view>
+                    </navigator>
+                    <view class="name_button" wx:if="{{login==1}}">
+                        <navigator hoverClass="hover" url="../tips-info/index">
+                            <button size="mini">登录授权</button>
+                        </navigator>
+                    </view>
+                </view>
+                <view class="myVip gridXt mt20 flex-jb pt10 pb10  f14" wx:if="{{is_pay}}">
+                    <view bindtap="linkto" class="myVipIn iconglobal" data-url="../user_memberNotice/index" wx:if="{{is_pay}}">
+                        <text class="iconfont icon-vip f18 iconglobal"></text> 会员
+          </view>
+                    <view bindtap="tk" class="myVipIn" wx:if="{{userInfo.end_time>timestamp&&userInfo.info_status==2}}">
+            到期时间：{{userInfo.end_time==-1?'永久有效':userInfo.end_time_day}}
+          </view>
+                    <view class="btn   blank bd3 tc global" wx:if="{{userInfo.end_time==-1&&userInfo.info_status==2}}">
+              永久会员
+            </view>
+                    <block wx:else>
+                        <view bindtap="tk" class="btn blank bd3 tc global" wx:if="{{userInfo.info_status==2&&userInfo.end_time&&userInfo.end_time>timestamp}}">
+              续费
+            </view>
+                        <view bindtap="tk" class="btn   blank bd3 tc global" wx:else>
+              开通
+            </view>
+                    </block>
+                </view>
+            </view>
+            <block wx:if="{{userInfo}}">
+                <view class="myList f14" wx:if="{{is_pay}}">
+            <view class="title flex">
+            <view class="line"></view>
+            <view bindtap="active" class="titCon disb f18">阅读服务</view>
+            <view class="line lineRg"></view>
+        </view>
+        
+
+
+                    <view class="myUl bWhite bd8 tc clearfix">
+                            <view bindtap="linkto" class="myLi pt15 pb15" data-url="/sis_shiyi/pages/newcms/aboutme/index?id=55">
+                            <icon class="iconfont icon-xing disb f30 pb10 iconglobal"></icon>
+              关于拾一
+            </view>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit/index">
+                            <icon class="iconfont icon-tubiao212 disb f30 pb10 iconglobal"></icon>
+              分享收益
+            </view>
+                        <form bindsubmit="au" class="myLi" reportSubmit="true">
+                            <button class="shenqing-author-btn" formType="submit" type="primary">
+                                <view class="pt15 pb15" data-url="../user_shareProfit/index" wx:if="{{!userInfo.author}}">
+                                    <icon class="iconfont icon-zuozhe disb f30 pb10 iconglobal"></icon>
+                  申请作者
+                </view>
+                            </button>
+                        </form>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit_author/index" wx:if="{{userInfo.author}}">
+                            <icon class="iconfont icon-shouyi- disb f30 pb10 iconglobal"></icon>
+              我的收益
+            </view>
+                        <view bindtap="artPushWay" class="myLi pt15 pb15" data-url="../user_publish/index" wx:if="{{userInfo.author}}">
+                            <icon class="iconfont icon-wenzhang1 disb f30 pb10 iconglobal"></icon>
+              发布文章
+            </view>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="1" data-url="../user_articelList/index" wx:if="{{userInfo.author}}">
+                            <icon class="iconfont icon-wenzhang1 disb f30 pb10 iconglobal"></icon>
+              我的文章
+            </view>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="2" data-url="../user_articelList/index">
+                            <icon class="iconfont icon-fufeifenxi disb f30 pb10 iconglobal"></icon>
+              已购买
+            </view>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="3" data-url="../user_articelList/index">
+                            <icon class="iconfont icon-shoucang disb f30 pb10 iconglobal"></icon>
+              我的收藏
+            </view>
+                        <!-- <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_myInventCard/index">
+                            <icon class="iconfont icon-yaoqingma1 disb f30 pb10 iconglobal"></icon>
+              我的邀请卡
+            </view>
+                        <view class="myLi">
+                            <button class="shenqing-author-btn" openType="openSetting">
+                                <view class="pt15 pb15">
+                                    <icon class="iconfont icon-shouquan disb f30 pb10 iconglobal"></icon>
+                  授权设置
+                </view>
+                            </button>
+                        </view> -->
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view bindtap="copy" class="shade_bg" wx:if="{{au}}">
+        <view class="innerBox tc">
+            <view bindtap="au" class="closeBtn"></view>
+            <view class="payVal">温馨提示</view>
+            <view class="radioBox2">{{au_hint}}</view>
+        </view>
+    </view>
+    <view class="shade_bg" wx:if="{{tk}}">
+        <view class="innerBox tc">
+            <view bindtap="tk" class="closeBtn"></view>
+            <view class="payVal">您需要支付
+        <text class="f18 green mr5 ml5 iconglobal">{{money}}</text> 元</view>
+            <view class="radioBox gridXb">
+                <radio-group>
+                    <label bindtap="select" class="label" data-day="{{item.day}}" data-id="{{item.id}}" data-mo="{{item.money}}" wx:for="{{datum}}">
+                        <radio></radio>{{item.title}}
+            </label>
+                    <label bindtap="select" class="label" data-convert="1" wx:if="{{vipCon==1}}">
+                        <radio></radio>使用VIP兑换券
+          </label>
+                </radio-group>
+                <view wx:if="{{convert==1}}">
+                    <input bindblur="setConvertNum" cursorSpacing="45" focus="{{focus}}" placeholder="输入兑换码,建议提前复制"></input>
+                </view>
+            </view>
+            <button bindtap="pay" class="submitBtn global">购买</button>
+        </view>
+    </view>
+    <view class="shade_bg" wx:if="{{art_push_way}}">
+        <view class="innerBox tc">
+            <view bindtap="artPushWay" class="closeBtn"></view>
+            <view class="payVal">请选择发布方式</view>
+            <view class="radioBox gridXb">
+                <radio-group>
+                    <label bindtap="artPushWayTrue" class="label apw" id="mob">移动端发布</label>
+                    <label bindtap="artPushWayTrue" class="label apw" id="pc">
+                        <text space="nbsp">PC  端发布</text>
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+    </view>
+    <template is="tabbar" data="{{index_t:3,tabbar:tabbar,tabbarcolor:tabbarcolor,textcolor:textcolor}}"></template>
+</view>

@@ -1,0 +1,15 @@
+<template name="tabbar">
+    <view class="tabbar_top" style="--color:{{color}};">
+        <view class="pages-footer" style="background-color:{{tabbarcolor}};color:{{textcolor}}">
+            <view class="pages-footer-display">
+                <navigator class="pages-footer-flex {{item.moren==index_t?'iconPink':''}}" openType="redirect" url="{{item.link}}" wx:for="{{tabbar}}">
+                    <view class="iconsize">
+                        <image src="{{item.checked}}" wx:if="{{item.moren==index_t}}"></image>
+                        <image src="{{item.default}}" wx:else></image>
+                    </view>
+                    <view class="footer-text">{{item.name}}</view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</template>

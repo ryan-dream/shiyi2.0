@@ -1,0 +1,82 @@
+@import "../../../../wuBaseWxss/0.wxss";
+
+page {
+    background-color: #fff;
+}
+
+.title {
+    align-items: center;
+    justify-content: center;
+    margin-top: 40rpx;
+}
+
+.line {
+    position: relative;
+    width: 60rpx;
+    height: 2rpx;
+    background-color: #b5b5b5;
+}
+
+.line::before {
+    content: '';
+    position: absolute;
+    right: -8rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8rpx;
+    height: 8rpx;
+    border-radius: 50%;
+    border: 2rpx solid #B5B5B5;
+}
+
+.lineRg::before {
+    left: -8rpx;
+}
+
+.titCon {
+    margin: 0 30rpx;
+    color: #666;
+    font-size: 30rpx;
+    border-radius: 8rpx;
+    text-align: center;
+}
+
+.titCon:active {
+    color: #fff;
+    background-color: #07bb45;
+}
+
+.list {
+    margin-top: 30rpx;
+    padding: 0 10rpx;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    height: 78rpx;
+    line-height: 78rpx;
+    background-color: #f1f1f1;
+    color: #333;
+    border-right: 4rpx solid #fff;
+    margin-bottom: 2rpx;
+    border-radius: 8rpx;
+    vertical-align: bottom;
+}
+
+.twoLine {
+    padding: 6rpx 4rpx;
+    font-size: 24rpx;
+    line-height: 34rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+
+.item:active {
+    color: #fff;
+    background-color: #eeeeee;
+}

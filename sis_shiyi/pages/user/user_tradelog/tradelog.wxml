@@ -1,0 +1,16 @@
+<view class="list">
+    <view class="list-item" wx:for="{{data}}">
+        <image class="user-img" src="{{item.avatar}}"></image>
+        <view class="content sub">
+            <view class="item-title">{{item.nickname}}  </view>
+        </view>
+        <view class="price red">
+              {{item.title?item.title:'充值会员'}}
+          </view>
+    </view>
+</view>
+<view class="nothing grey mt10 mb10 tc f14 flex" wx:if="{{!ismore}}">
+    <text class="line sub mr10"></text>
+    <text>没有更多了</text>
+    <text class="line sub ml10"></text>
+</view>

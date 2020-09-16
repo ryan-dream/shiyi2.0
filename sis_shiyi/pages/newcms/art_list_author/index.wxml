@@ -1,0 +1,69 @@
+<view class="top-search-box">
+    <form bindsubmit="formSubmit">
+        <view class="top-search flex">
+            <view class="search-inp sub flex">
+                <input bindblur="select" bindconfirm="select" class="sub mr10" name="title" placeholder="请输入昵称" value="{{select_text}}"></input>
+                <button class="iconfont icon-icon117 search-btn" formType="submit"></button>
+            </view>
+        </view>
+    </form>
+</view>
+<view class="floatBox screen-box" wx:if="{{tk}}">
+    <view class="screen-cont flex flexC">
+        <view class="f18 tc p15">筛选</view>
+        <view class="screen-sort sub">
+            <view class="mb15" wx:for="{{nav.father}}" wx:for-item="v">
+                <view>{{v.name}}</view>
+                <view>
+                    <text bindtap="active" class="screen-tag active" data-cid="all" data-fid="{{v.id}}" wx:if="{{cid[v.id]=='noundefined'}}">全部</text>
+                    <text bindtap="active" class="{{cid[v.id].length==nav.children[v.id].length&&cid[v.id]!=undefined?'screen-tag active':'screen-tag '}}" data-cid="all" data-fid="{{v.id}}" wx:else>全部</text>
+                    <text bindtap="active" class="{{cid[v.id][item.id]?'screen-tag active':'screen-tag '}}" data-cid="{{item.id}}" data-fid="{{v.id}}" wx:for="{{nav.children[ v['id'] ]}}">{{item.name}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="flex screen-endbtn">
+            <button bindtap="search" class="sub" type="primary">完成</button>
+            <button bindtap="unset" class="sub reset-btn" type="default">重置</button>
+        </view>
+    </view>
+    <view class="floatBox floatBoxBg"></view>
+</view>
+<view class="list-top">
+    <view class="img">
+        <image src="../../../resource/images/nav/pai.png"></image>
+    </view>
+    <view class="type">
+        <view class="avtive">数量</view>
+        <view>金额</view>
+        <view>阅读</view>
+        <view>点赞</view>
+    </view>
+</view>
+<view class="list">
+    <view class="list-item" wx:for="{{datum}}">
+        <navigator hoverClass="navigator-hover" url="../art_list/index?author={{item.id}}&types=7">
+            <view class="rank iconfont icon-one" wx:if="{{index+1==1}}"></view>
+            <view class="rank iconfont icon-two" wx:elif="{{index+1==2}}"></view>
+            <view class="rank iconfont icon-three" wx:elif="{{index+1==3}}"></view>
+            <view class="rank iconfont" wx:else>{{index+1}}</view>
+            <view class="left-head ">
+                <image src="{{item.avatar}}"></image>
+            </view>
+            <view class="right">
+                <view class="right-name">{{item.nickname}}</view>
+                <view class="right-msg">
+                    <view>总阅读数量:{{item.all_read?item.all_read:0}}</view>
+                    <view>总点赞数量:{{item.all_click?item.all_click:0}}</view>
+                    <view>发布文章数量:{{item.all_art?item.all_art:0}}</view>
+                    <view>总收益:{{item.money}}</view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class="m15">
+    <view class="noInfo tc pb15">
+        <text class="iconfont icon-meiyougengduo disb"></text>
+        <text class="linght disb f16">{{hint?hint:'努力加载中...'}}</text>
+    </view>
+</view>

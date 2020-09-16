@@ -1,0 +1,64 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <view class="user_content">
+        <view class="Member_head">
+            <view bindtap="onChooseImageTap" class="Member_img domain">
+                <image backgroundSize="cover" class="userinfo-avatar" src="{{imgsave?imgsave:userInfo.avatar}}"></image>
+                <view class="userinfo_name">{{userInfo.nickname}}</view>
+            </view>
+        </view>
+        <form bindreset="formReset" bindsubmit="formSubmit">
+            <view class="user_edit_con">
+                <view class="user_edit_li">
+                    <view class="user_edit_li_title">
+                        <text class="fr grey">(8个汉字，16个英文字符)</text>姓名</view>
+                    <view class="user_edit_li_input">
+                        <input maxlength="8" name="realname" placeholder="8个字以内" value="{{userInfo.realname}}"></input>
+                    </view>
+                </view>
+                <view class="user_edit_li">
+                    <view class="user_edit_li_title">性别</view>
+                    <view class="user_edit_li_input">
+                        <radio-group class="radio-group " name="sex">
+                            <block wx:if="{{userInfo.sex==1}}">
+                                <radio checked="checked" value="1"></radio>男
+                            </block>
+                            <block wx:else>
+                                <radio value="1"></radio>男
+                            </block>
+                            <block wx:if="{{userInfo.sex==2}}">
+                                <radio checked="checked" value="2"></radio>女
+                            </block>
+                            <block wx:else>
+                                <radio value="2"></radio>女
+                            </block>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="user_edit_li">
+                    <view class="user_edit_li_title">
+                        <text></text>手机号</view>
+                    <view class="user_edit_li_input">
+                        <input maxlength="11" name="mobile" placeholder="请正确填写手机号" value="{{userInfo.mobile}}"></input>
+                    </view>
+                </view>
+                <view class="user_edit_li">
+                    <view class="user_edit_li_title">
+                        <text></text>支付宝账号</view>
+                    <view class="user_edit_li_input">
+                        <input maxlength="50" name="Alipay" placeholder="请输入支付宝账号" value="{{userInfo.alipay}}"></input>
+                    </view>
+                </view>
+                <view class="user_edit_li">
+                    <view class="user_edit_li_title">
+                        <text class="fr grey">(100个字以内)</text>详细介绍下自己</view>
+                    <view class="user_edit_li_input">
+                        <input maxlength="100" name="desc" placeholder="100个字以内" value="{{userInfo.desc}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="m20 global">
+                <button class="global" formType="submit" hoverClass="none" type="primary">提交保存</button>
+            </view>
+        </form>
+    </view>
+</view>

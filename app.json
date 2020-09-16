@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "sis_shiyi/pages/newcms/index/index",
+    "sis_shiyi/pages/newcms/classify/classify",
+    "sis_shiyi/pages/newcms/search/index",
+    "sis_shiyi/pages/newcms/detail/index",
+    "sis_shiyi/pages/newcms/outside/index",
+    "sis_shiyi/pages/newcms/art_list/index",
+    "sis_shiyi/pages/newcms/column/column",
+    "sis_shiyi/pages/newcms/Catalog/Catalog",
+    "sis_shiyi/pages/newcms/Chapter/Chapter",
+    "sis_shiyi/pages/newcms/shang/shang",
+    "sis_shiyi/pages/newcms/shang_more/shang_more",
+    "sis_shiyi/pages/newcms/about/index",
+    "sis_shiyi/pages/newcms/aboutme/index",
+    "sis_shiyi/pages/user/tips-info/index",
+    "sis_shiyi/pages/user/user_index/index",
+    "sis_shiyi/pages/user/user_edit/index",
+    "sis_shiyi/pages/user/user_shareProfit/index",
+    "sis_shiyi/pages/user/user_myInventCard/index",
+    "sis_shiyi/pages/user/user_memberNotice/index",
+    "sis_shiyi/pages/user/user_articelList/index",
+    "sis_shiyi/pages/user/user_publish/index",
+    "sis_shiyi/pages/user/user_shareProfit_author/index",
+    "sis_shiyi/pages/user/user_tradelog/tradelog",
+    "sis_shiyi/pages/template/tabbar/tabbar"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff", 
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

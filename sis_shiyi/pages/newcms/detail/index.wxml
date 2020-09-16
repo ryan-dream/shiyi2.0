@@ -1,0 +1,321 @@
+<view class="tabbar_top " style="--color:{{color}}; {{none==1?'display:none;':''}}">
+  <view class="navTab">
+    <view catchtap="showContent" class="navItem {{contentHidden==false?'navSelected':''}}">原文</view>
+    <view catchtap="showArticle" class="navItem {{articleHidden==false?'navSelected':''}}">讲解</view>
+  </view>
+  <!-- <view>
+    <view bindtap="index" class="homeH global2">
+      <view bindtap="index" class="home global2">
+        <icon class="iconfont icon-shouye iconsize "></icon>
+      </view>
+    </view>
+  </view> -->
+  <view class="article">
+    <!-- <view class="f18 tc art-title mb5">{{datum.article.title}}</view>
+    <view class="tc art-explain">
+      <view>{{datum.article.createtime}}</view>
+      <navigator url="../art_list/index?types=7&author={{datum.article.author_id}}">
+        <text class="ml15 mr15 blue">{{datum.article.author}}</text>
+      </navigator>
+      <text bindtap="more" class="blue" data-pid="{{datum.article.pcate}}" data-types="6" data-url="../art_list/index">{{datum.article.pcate1}}</text>
+      <text bindtap="more" class="blue" data-cid="{{datum.article.ccate}}" data-types="6" data-url="../art_list/index" wx:if="{{datum.article.ccate1}}">  {{datum.article.ccate1}}</text>
+    </view> -->
+    <block wx:if="{{datum.article.type!=2}}">
+
+      <view class="art-audio tc" wx:if="{{datum.article.types==3}}">
+        <view>
+          <view class="myAudio" hidden="{{articleHidden}}">
+            <view class="audio_box">
+              <view class="audio_gaine {{playStatus==1?'active':''}}">
+                <audio bindpause="onPause" bindplay="onPlay" id="myAudio" src="{{datum.article.bg_music}}"></audio>
+                <view catchtap="onTogglePlayTap" class="voice-img write tc" style="background-image: url({{datum.article.thumb}});background-size: cover;background-position: center center;background-repeat: no-repeat;">
+                  <view class="iconfont icon-bofang" wx:if="{{playStatus!=1}}"></view>
+                  <view class="iconfont icon-zanting" wx:if="{{playStatus==1}}"></view>
+                </view>
+              </view>
+            </view>
+            <view class="radio flex" hidden="{{articleHidden}}">
+              <text class="timesize grey">{{stepTime}}</text>
+              <slider activeColor="#A9A9A9" bindchanging="auProChanging" blockColor="#D3D3D3" blockSize="18" class=" sub pl10 pr10 ml15 mr15" max="{{auProMax}}" value="{{auProVal}}"></slider>
+              <text class="timeshow grey">{{durationTime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="section tc video-box" wx:if="{{datum.article.types==4&&!report_tan}}">
+        <video controls bindplay="videoPlay" bindtimeupdate="videoStop" customCache="{{false}}" id="myVideo" src="{{datum.article.bg_music}}"></video>
+      </view>
+            <block wx:if="{{datum.article.pay_money>0&&mypay==null&&datum.member==0&&!all&&userInfo.author!=datum.article.author_id}}">
+        <import src="../../../resource/wxParse/wxParse.wxml"></import>
+        <import src="../../../resource/wxParse/wxParse.wxss"></import>
+        <view class="art-content f14" hidden="{{contentHidden}}" >
+          <template is="wxParse" data="{{wxParseData:description.nodes}}"></template>
+        </view>
+        <view class="art-content f14" hidden="{{articleHidden}}">
+          <template is="wxParse" data="{{wxParseData:explaindesc.nodes}}"></template>
+        </view>
+      </block>
+    </block>
+    <view class="art-content f14" wx:elif="{{datum.article.content==''}}">
+      <view class="para" wx:if="{{index<datum.article.description}}" wx:for="{{datum.article.descrip}}">
+        <image class="paraPic" mode="widthFix" src="{{itemName}}" wx:if="{{datum.article.types==2?idx<datum.article.description:index<datum.article.description}}" wx:for="{{item.image}}" wx:for-index="idx" wx:for-item="itemName"></image>
+        <view class="paraCon">
+          <text>{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{datum.article.types!=3||datum.article.types!=4}}">
+      <block wx:if="{{mypay!=null||datum.article.pay_money==0||datum.article.pay_money>0&&datum.member==1||userInfo.author==datum.article.author_id}}">
+        <block wx:if="{{datum.article.type!=2}}">
+
+          <import src="../../../resource/wxParse/wxParse.wxml"></import>
+          <view class="art-content " hidden="{{contentHidden}}">
+            <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+          </view>
+          <import src="../../../resource/wxParse/wxParse.wxml"></import>
+          <view class="art-content " hidden="{{articleHidden}}">
+            <template is="wxParse" data="{{wxParseData:explain.nodes}}"></template>
+          </view>
+        </block>
+        <view class="art-content " wx:else>
+          <view class="para" wx:for="{{datum.article.content}}">
+            <image class="paraPic" mode="widthFix" src="{{itemName}}" style="" wx:for="{{item.image}}" wx:for-item="itemName"></image>
+            <view class="paraCon">
+              <text class="">{{item.text}}</text>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="tc" wx:if="{{is_pay}}">
+          <view bindtap="shang" class="awardBox iconglobal">赏</view>
+          <view class="f14 grey">已有{{shang_num}}人打赏</view>
+        </view>
+        <view class="shade_bg" wx:if="{{shang}}">
+          <view class="modal">
+            <view bindtap="shang" class="closeBtn"></view>
+            <view class=" grey mb10">打赏金额</view>
+            <view class="red f12 ">请输入您要打赏的金额</view>
+            <form bindsubmit="shangSubmit">
+              <input class="inp gridFour" name="shang_money" type="digit" value="1.00"></input>
+              <button class="submitBtn global" formType="submit" type="primary">提交</button>
+            </form>
+          </view>
+        </view> -->
+      </block>
+    </block>
+    <view class="read-continue" wx:if="{{datum.article.pay_money>0&&mypay==null&&datum.member==0&&is_pay&&userInfo.author!=datum.article.author_id}}">
+      <view class="continue-btn" wx:if="{{ios==1}}">
+        <button bindtap="iosread" class="global" type="primary">继 续 阅 读</button>
+      </view>
+      <view bindtap="continues" class="continue-btn" wx:if="{{ios==0}}">
+        <button class="global" type="primary" wx:if="{{datum.article.types==1||datum.article.types==2}}">继 续 阅 读</button>
+        <button class="global" type="primary" wx:if="{{datum.article.types==3}}">继 续 收 听</button>
+        <button class="global" type="primary" wx:if="{{datum.article.types==4}}">继 续 观 看</button>
+      </view>
+      <view wx:if="{{iosRead==1}}">
+        <text class="iosread-des" space="emsp">  请切换至安卓(Android)系统，继续体验该功能  </text>
+      </view>
+      <view>
+        <view class="conTabBox flex tc  gridFour" wx:if="{{continues&&is_pay}}">
+          <view bindtap="become" class="{{!become?'conTab sub activeTab global':'conTab sub'}}">单篇阅读</view>
+          <view bindtap="become" class="{{become?'conTab sub activeTab global':'conTab sub'}}">成为会员</view>
+        </view>
+        <view class="buttonBox" wx:if="{{continues&&is_pay}}">
+          <view bindtap="pay" class="single" data-money="{{datum.article.pay_money}}" data-types="1" wx:if="{{!become}}">
+            <button>{{datum.article.pay_money}}元 支付单篇</button>
+          </view>
+          <view class="member" wx:if="{{continues&&become}}">
+            <button bindtap="pay" class="lineText" data-day="{{item.day}}" data-money="{{item.money}}" data-types="3" data-vid="{{item.id}}" wx:for="{{datum.member_type}}">{{item.title}}
+              <text class="iconglobal">{{item.money}}</text>元</button>
+          </view>
+        </view>
+        <view class="tc grey f12 mb20">
+          <view class="mt20">已有{{pay_num}}人为该文章支付</view>
+        </view>
+      </view>
+    </view>
+    <view class="art-box f14 grey">
+      <!-- <view class="art-otermsg-head">
+        <view class="read fontSize" wx:if="{{datum.article.clickNum}}">阅读:{{datum.article.clickNum}}</view>
+        <block wx:if="{{is_pay}}">
+          <block wx:if="{{oldzan}}">
+            <view bindtap="zancollect" class="dotPitch" data-types="1" wx:if="{{datum.article.zanNum}}">
+              <view class=" iconfont icon-dianzan fontSize red">{{zan}}</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view bindtap="zancollect" class="dotPitch" data-types="2" wx:if="{{datum.article.zanNum}}">
+              <view class=" iconfont icon-dianzan fontSize">{{zan}}</view>
+            </view>
+          </block>
+        </block>
+
+        <view bindtap="report_tan" class="report">有用</view>
+        <view bindtap="report_tan" class="report">没用</view>
+
+      </view> -->
+
+<view class="f166">你对本篇文章的建议？</view>
+  <view class="cu-bar btn-group">
+     
+    <button  bindtap="report_tan" class="iconfont icon-xiaolian cu-btn bg-green round "> 有用</button>
+    <button bindtap="report_tan" class="cu-btn bg-blue  round">没用</button>
+  </view>
+      <view class="art-otermsg-bottom clearfix">
+        <view class="fl">
+          <view bindtap="zancollect" class="collect-active-red" data-types="3" wx:if="{{collect}}">
+            <view class="iconfont icon-shoucang1 fontSize">
+              收藏
+            </view>
+          </view>
+          <view bindtap="zancollect" class="collect-ace " data-types="4" wx:else>
+            <view class="iconfont icon-shoucang1 fontSize">
+              收藏
+            </view>
+          </view>
+          <view bindtap="tel" class="tell-me" wx:if="{{datum.article.tel}}">
+            联系我们
+          </view>
+        </view>
+        <view bindtap="tk" class="fr" style="line-height:40rpx;">
+          <view class="iconfont icon-fabu blue blueSize">写留言</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="floatBox write-msg-box" wx:if="{{tk}}">
+    <view class="write-msg">
+      <view bindtap="tk" class="write-close">
+        <text class="iconfont icon-2"></text>
+      </view>
+      <form bindsubmit="formSubmit" reportSubmit="true">
+        <view class="textarea-box" wx:if="{{msgsh==1}}">
+          <textarea cursorSpacing="100" fixed="true" name="content" placeholder="请输入留言内容，待管理员审核后方可显示~"></textarea>
+        </view>
+        <view class="textarea-box" wx:if="{{msgsh==0}}">
+          <textarea cursorSpacing="100" fixed="true" name="content" placeholder="请输入留言内容"></textarea>
+        </view>
+        <button formType="submit" type="primary">提交</button>
+      </form>
+    </view>
+    <view class="floatBox floatBoxBg"></view>
+  </view>
+  <view class="mt10 related-box">
+    <view class="related-art-tit gridXb">
+      <view class=" f16">相关文章</view>
+      <view bindtap="more" class="right-more grey arrowR" data-pid="{{datum.article.pcate}}" data-types="6" data-url="../art_list/index">更多</view>
+    </view>
+    <view class="related-art-box">
+      <view bindtap="detail" class="related-art-item" data-appoint="{{item.appoint}}" data-id="{{item.id}}" data-url="../detail/index" wx:for="{{related}}">
+        <view class="art-img">
+          <image mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="related-item-tit lineText2 mt5">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="comment" wx:if="{{comment.length>0}}">
+    <view class="pl15 pt15 p10">精选评论</view>
+    <view>
+      <view class="com-item gridXb" wx:for="{{comment}}">
+        <view class="user-img">
+          <image class="circle" mode="aspectFill" src="{{item.avatar}}"></image>
+        </view>
+        <view class="ml10 com-cont">
+          <view class="user-name">
+            <view class="lineText">{{item.nickname}}</view>
+            <view bindtap="zan" class="blue" data-id="{{item.id}}">
+              <text class="f16 iconfont icon-dianzan {{item.zan?'red':''}}" wx:if="{{is_pay}}">{{item.zannum}}</text>
+            </view>
+          </view>
+          <view>{{item.discuss}}</view>
+          <view class="f12 grey mt5">{{item.createtime}}</view>
+          <view class="author-reply" wx:if="{{item.reply}}">
+            <view class="author-reply-tit">
+              <view class="bf global"></view>作者回复</view>
+            <view>{{item.reply}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="tanceng" style="display:block;" wx:if="{{report_tan}}">
+    <view class="tanceng-box">
+      <view class="box-h3 cuIcon-edit f161">
+        我的建议
+      </view>
+      <form bindsubmit="report_submit">
+        <radio-group bindchange="report" class="group-mi">
+        <text class="f162">详细填写，以便建议内容被更快处理。最多60个字?</text>
+          <!-- <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="1"></radio>您的文章主题明确，文情并茂。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="2"></radio>深深的打动人心，引发共鸣构思新颖。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="3"></radio>构思新颖，题材独具匠心。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="4"></radio>这可谓是经典中的经典，乃是我们的模范。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="5"></radio>题材独具匠心，情节跌宕起伏紧扣人心。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="6"></radio>平凡中显示出不凡的功底，可谓字字珠玑。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="7"></radio>你的文章如行云流水,一气呵成。
+          </label>
+          <label class="checkbox" style="display:block;">
+            <radio class="re-chck" value="8"></radio>关于你对本篇文章的建议?
+          </label> -->
+        </radio-group>
+        <view class="the-input">
+          <textarea class="textarea" maxlength="200" name="radio_content" placeholder="" ></textarea>
+        </view>
+        <view class="select">
+           <button class="select-determine iconPink cuIcon-roundcheckfill" formType="submit">建议</button>
+          <view bindtap="report_tan" class="select-cancel cuIcon-roundclosefill">取消</view>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>
+<view class="poster-view-bg" wx:if="{{posterView}}">
+  <view class="cancas_img" id="canvas-container">
+    <canvas bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" canvasId="artPosterImg" class="canvas-area" disableScroll="true"></canvas>
+  </view>
+  <view class="bao_btn">
+    <view bindtap="isSaveToAblum" wx:if="{{posSucc}}">保存</view>
+    <view bindtap="ocposter" data-postype="0">取消</view>
+  </view>
+</view>
+<!-- <button bindtap="ocposter" class="fixedHome1">
+  <icon class=" cuIcon-forward iconsize "></icon>
+      <view class="fixedBg1"></view>
+    <image class="fixedIcon1" src="../../../resource/images/artposter/share.png"></image>
+
+</button> -->
+
+<view bindtap="index" class="fixedHome">
+    <view class="fixedBg"></view>
+    <image class="fixedIcon" src="../../../resource/images/artposter/home_s.png"></image>
+</view>
+
+<!-- <view bindtap="ocposter" class="fixedHome">
+    <view class="fixedBg"></view>
+    <image class="fixedIcon" src="../../../resource/images/artposter/share.png"></image>
+</view> -->
+<view class="art-audio tc" wx:if="{{datum.article.types==3}}">
+  <view class="radio1 flex "hidden="{{articleHidden}}">
+    <audio bindpause="onPause" bindplay="onPlay" id="myAudio" src="{{datum.article.bg_music}}"></audio>
+    <view catchtap="onTogglePlayTap" class="voice-img write tc">
+      <view class="iconfont icon-bofang1 text-red " wx:if="{{playStatus!=1}}"></view>
+      <view class="iconfont icon-zanting1 text-red" wx:if="{{playStatus==1}}"></view>
+    </view>
+    <text class="timesize grey2">{{stepTime}}</text>
+    <slider activeColor="#4FC3F7" bindchanging="auProChanging" blockColor="#ef6e5f" blockSize="30" class=" sub pl10 pr10 ml151 mr151" max="{{auProMax}}" value="{{auProVal}}"></slider>
+    <text class="timeshow grey1">{{durationTime}}</text>
+  </view>
+</view>

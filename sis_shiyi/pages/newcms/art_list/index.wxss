@@ -1,0 +1,238 @@
+@import "../../shiyiUI/main.wxss";
+@import "../../shiyiUI/icon.wxss";
+page {
+    font-size: 32rpx;
+}
+
+image {
+    width: 100%;
+    height: 100%;
+}
+
+.iconfont {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.top-search-box {
+    height: 108rpx;
+}
+
+.top-search {
+    background: #07bb45;
+    color: #fff;
+    padding: 20rpx 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.search-inp {
+    background: #fff;
+    border-radius: 10rpx;
+    margin: 0 20rpx;
+    padding-left: 30rpx;
+    font-size: 28rpx;
+    line-height: 68rpx;
+    color: #666;
+}
+
+.search-inp input {
+    height: 68rpx;
+}
+
+.search-btn {
+    border: none;
+    background: transparent;
+    font-size: 38rpx;
+    line-height: 68rpx;
+}
+
+.search-btn:active {
+    background: #fafafa;
+}
+
+.search-btn::after {
+    border: none;
+}
+
+.screen-btn {
+    width: 68rpx;
+    height: 68rpx;
+    line-height: 68rpx;
+    text-align: center;
+    margin-right: 20rpx;
+    transition: all 0.2s linear;
+}
+
+.screen-btn:active {
+    background: rgba(255,255,255,0.2);
+}
+
+.screen-box {
+    z-index: 10;
+}
+
+.screen-box .floatBoxBg {
+    display: block;
+    opacity: 0;
+    animation: fadeIn 0.1s linear forwards;
+}
+
+.screen-cont {
+    background: #fff;
+    width: 70%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    transform: translateX(100%);
+    animation: fadeInRight 0.3s 0.16s linear forwards;
+}
+
+.screen-sort {
+    padding: 0 30rpx;
+}
+
+.screen-tag {
+    display: inline-block;
+    font-size: 28rpx;
+    line-height: 1.5;
+    padding: 6rpx 16rpx;
+    color: #666;
+    border: 1px solid #eee;
+    margin-top: 16rpx;
+    margin-right: 16rpx;
+    border-radius: 6rpx;
+    transition: all 0.1s linear;
+}
+
+.screen-tag.active {
+    background: #07bb45;
+    color: #fff;
+    border-color: #07bb45;
+}
+
+.screen-sort.sub {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.screen-endbtn button {
+    border-radius: 0;
+    font-size: 32rpx;
+    line-height: 86rpx;
+}
+
+.screen-endbtn button::after {
+    border: none;
+}
+
+.screen-endbtn .reset-btn {
+    color: #f66;
+}
+
+@keyframes fadeInRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.art-item {
+    padding: 30rpx;
+    background: #fff;
+}
+
+.art-item:active {
+    background: #fafafa;
+}
+
+.art-img {
+    width: 200rpx;
+    height: 160rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.art-othermsg {
+    line-height: 110%;
+    flex-wrap: wrap;
+}
+
+.art-mgg-item {
+    white-space: nowrap;
+    margin-right: 10rpx;
+    margin-top: 10rpx;
+}
+
+.imgWh {
+    position: relative;
+    width: 200rpx;
+    height: 150rpx;
+}
+
+.height {
+    height: 94rpx;
+}
+
+.imgWh-ceng {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.iconfsize {
+    color: #fff;
+    display: inline-block;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 70rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -35rpx;
+    margin-top: -35rpx;
+}
+
+.playH,.homeH {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    z-index: 1000;
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+    background: rgba(8,186,6,1);
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 100%;
+    box-shadow: 0 0 5px rgba(12,187,8,.5);
+}
+
+.iconfont {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.iconsize {
+    font-size: 20px;
+}

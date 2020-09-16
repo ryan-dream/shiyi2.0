@@ -1,0 +1,83 @@
+page {
+    color: #333;
+    font-size: 32rpx;
+    background: #f8f8f8;
+}
+
+.list-item {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 30rpx;
+    position: relative;
+}
+
+.list-item::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: #ececec;
+    box-sizing: border-box;
+    bottom: 0;
+    transform-origin: bottom center;
+    height: 1px;
+    right: 0;
+    left: 30rpx;
+    transform: scale(1,0.5);
+}
+
+.list-item:active {
+    background-color: rgba(0,0,0,0.01);
+}
+
+.list-item>.sub {
+    flex: 1;
+}
+
+.user-img {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+}
+
+.list-item .content {
+    margin: 0 20rpx;
+}
+
+.list-item .time {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 5rpx;
+}
+
+.price {
+    font-size: 36rpx;
+    color: #666;
+}
+
+.price.red {
+    color: #f66;
+}
+
+.price.green {
+    color: #0f0;
+}
+
+.aside-area {
+    width: 60rpx;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.tixian {
+    width: 100%;
+    background: #f66;
+    color: #fff;
+    height: auto;
+    padding: 18rpx;
+    box-sizing: border-box;
+}

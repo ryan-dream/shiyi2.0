@@ -1,0 +1,130 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <form bindsubmit="formSubmit" reportSubmit="true">
+        <view class="cell flex">
+            <view class="head">标题</view>
+            <input class="titleInp " name="title" placeholder="请输入标题" value="{{one.title}}"></input>
+        </view>
+        <view class="priBox cell flex">
+            <view class="head">价格</view>
+            <radio-group bindchange="changePrice" class="radio-group flex ">
+                <label class="radio" wx:for="{{price}}">
+                    <radio checked="{{item.checked}}" value="{{item.name}}"></radio>{{item.value}}
+                </label>
+            </radio-group>
+            <view class="ml10 priInp flex" wx:if="{{changePrice}}">
+                <view class="f14">￥</view>
+                <input class=" " name="price" placeholder="请输入价格（元 / 每篇）" type="digit" value="{{one.pay_money}}"></input>
+            </view>
+        </view>
+        <view class="cell flex">
+            <text class="head">封面图</text>
+            <view bindtap="ChooseImageTap" class="sltBox" data-count="1" wx:if="{{!cover}}">
+                <image class="sltPic" mode="aspectFill" src="{{coverImg}}"></image>
+            </view>
+            <view bindtap="ChooseImageTap" class="uploadBtn" data-count="1" wx:if="{{cover}}"></view>
+        </view>
+        <view>
+            <view class="wzleibie"></view>
+            <view class="cell arrowR">
+                <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}">
+                    <view class="picker">
+                        文章分类：{{multiArray[0][ multiIndex[0] ]}}，{{multiArray[1][ multiIndex[1] ]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="mb15">
+            <view class="wzleibie mb5">文章类型</view>
+            <radio-group bindchange="change" class=" radio-group flex">
+                <label class="radio" wx:for="{{items}}">
+                    <block wx:if="{{item.checked=='true'}}">
+                        <radio checked="{{item.checked}}" value="{{item.name}}"></radio>{{item.value}}
+                    </block>
+                    <block wx:else>
+                        <radio data-value="{{item.name}}" value="{{item.name}}"></radio>{{item.value}}
+                    </block>
+                </label>
+            </radio-group>
+        </view>
+        <block wx:for="{{items}}">
+            <view class="twList" wx:if="{{item.name=='tuwen'&&item.checked=='true'}}">
+                <view class="mianfei flex" wx:if="{{changePrice}}">
+                    <view>免费试看</view>
+                    <input class="mfInp" name="look" type="number" value="{{one.description}}"></input>
+                    <view>段</view>
+                </view>
+                <view class="twItem" wx:for="{{tuwenNum}}" wx:for-index="idx1" wx:for-item="itemName">
+                    <view bindtap="delAll" class="close" data-index="{{idx1}}" wx:if="{{idx1!=0}}"></view>
+                    <view class="twItempics">
+                        <view class="twuploadBox" wx:for="{{imgArray[idx1]}}" wx:for-index="idx" wx:for-item="itemName">
+                            <image class="twuploadPic" src="{{itemName}}"></image>
+                            <view bindtap="delImg" class="closeBtn" data-idx="{{idx}}" data-index="{{idx1}}"></view>
+                        </view>
+                        <view bindtap="ChooseImageTap" class="uploadBtn" data-count="9" data-index="{{idx1}}" wx:if="{{imgArray[idx1].length<9}}"></view>
+                    </view>
+                    <textarea adjustPosition="true" autoHeight="true" bindblur="textareablur" class="twTextarea gridFour" cursorSpacing="180" data-index="{{idx1}}" maxlength="-1" name="text" placeholder="请输入内容" value="{{textArray[idx1]}}"></textarea>
+                    <view bindtap="tuwenAdd" class="addDom" data-index="{{idx1}}" wx:if="{{idx1==tuwenNum.length-1}}">+</view>
+                </view>
+            </view>
+            <view class="tjBox " wx:if="{{item.name=='tuji'&&item.checked=='true'}}">
+                <view class="mianfei flex" wx:if="{{changePrice}}">
+                    <view>免费试看</view>
+                    <input class="mfInp" name="lookImg" type="number" value="{{one.description}}"></input>
+                    <view>张</view>
+                </view>
+                <view class="cell">
+                    <block wx:for="{{imgArray}}">
+                        <view class="sltBox" wx:for="{{item}}" wx:for-index="idx" wx:for-item="itemName">
+                            <image class="sltPic" mode="aspectFill" src="{{itemName}}"></image>
+                            <view bindtap="delImg" class="closeBtn" data-idx="{{idx}}" data-index="0"></view>
+                        </view>
+                    </block>
+                    <view bindtap="ChooseImageTap" class="uploadBtn" data-count="9" data-index="0"></view>
+                </view>
+            </view>
+            <view class="ypBox " wx:if="{{item.name=='audio'&&item.checked=='true'}}">
+                <view>
+                    <view class="mianfei flex" wx:if="{{changePrice}}">
+                        <view>免费试听</view>
+                        <input class="mfInp" name="musicfree" value="{{one.aud_free}}"></input>
+                        <view>s</view>
+                    </view>
+                    <view class="flex recordBtn" wx:if="{{!saverecord}}">
+                        <button bindtap="start" class="mianfei-btn" hoverClass="button-hover">
+                            <icon class="iconfont icon-icon-test iconsize1"></icon>开始录音</button>
+                        <button bindtap="stop" class="mianfei-btn" hoverClass="button-hover2" wx:if="{{!play}}">
+                            <icon class="iconfont icon-jieshu iconsize2"></icon>结束录音</button>
+                        <button bindtap="play" class="mianfei-btn" hoverClass="button-hover3" wx:if="{{play}}">
+                            <icon class="iconfont icon-bofang11 iconsize2"></icon>播放录音</button>
+                    </view>
+                    <view class="audioBox" wx:if="{{saverecord}}">
+                        <view class="flex recordBtn">
+                            <button bindtap="saveplay" class="mianfei-btn mianfei-btn-play" hoverClass="button-hover3">
+                                <icon class="iconfont icon-bofang11 iconsize2"></icon>播放录音</button>
+                        </view>
+                        <cover-view bindtap="delRecord" class="closeBtn2">
+                            <cover-image src="../../../resource/images/nav/close1.png"></cover-image>
+                        </cover-view>
+                    </view>
+                </view>
+            </view>
+            <view class="vidBox" wx:if="{{item.name=='video'&&item.checked=='true'}}">
+                <view bindtap="chooseVideo" class="uploadBtn " wx:if="{{!videoSrc}}"></view>
+                <view style="text-align:center">
+                    <view class="mianfei flex" wx:if="{{changePrice}}">
+                        <view>免费试看</view>
+                        <input class="mfInp" name="videoFree" value="{{one.ved_free}}"></input>
+                        <view>s</view>
+                    </view>
+                    <view class="videoBox" wx:if="{{videoSrc}}">
+                        <video class="video" src="{{videoSrc}}"></video>
+                        <cover-view bindtap="delVideo" class="closeBtn1">
+                            <cover-image src="../../../resource/images/nav/close1.png"></cover-image>
+                        </cover-view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <button class="footBtn global" formType="submit">提交</button>
+    </form>
+</view>
