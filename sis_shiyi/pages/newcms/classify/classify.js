@@ -1,20 +1,23 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+getApp(), require("../../../resource/js/util.js"), require("../../../resource/utils/underscore"), 
+require("../../../resource/wxParse/wxParse.js");
+
+var e = require("../../../resource/function/function.js");
 
 Page({
     data: {
         nav: [],
         title: ""
     },
-    onLoad: function(e) {
-        _function.system(this), this.getDatum();
+    onLoad: function(t) {
+        e.system(this), this.getDatum();
     },
     onPullDownRefresh: function() {
         this.getDatum(), wx.stopPullDownRefresh();
     },
-    getDatum: function(e, t) {
-        var r = this;
-        _function.request("entry/wxapp/Classify", {}, "", function(e) {
-            r.setData({
+    getDatum: function(t, r) {
+        var s = this;
+        e.request("entry/wxapp/Classify", {}, "", function(e) {
+            s.setData({
                 nav: e
             });
         }, this);

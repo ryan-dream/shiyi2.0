@@ -1,0 +1,18 @@
+<view class="tabbar_top" style="--color:{{color}};">
+    <view class="article_list">
+        <view catchtap="goArtDetails" class="article_item" data-artid="{{item.artid}}" wx:for="{{serAetList}}">
+            <image class="community_img" src="{{item.thumb}}"></image>
+            <view class="community_text flex-column">
+                <view class="community_name lineText2">{{item.title}}</view>
+                <view class="community_det flex-row">
+                    <view class="community_det_num flex-row">
+                        <view class="community_det_">{{item.typesName}}</view>
+                        <view class="community_det_viewision"> | </view>
+                        <view class="community_det_">{{item.clickNum}}人认为有用</view>
+                    </view>
+                    <view class="community_det_price " wx:if="{{ios!=1&&is_pay}}">{{item.pay_money>0?'￥'+item.pay_money:'预览'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

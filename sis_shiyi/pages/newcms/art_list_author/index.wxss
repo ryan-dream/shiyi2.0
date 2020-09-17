@@ -1,4 +1,4 @@
-@import "../../../../wuBaseWxss/2.wxss";
+@import "../../../../wuBaseWxss/5.wxss";
 
 page {
     font-size: 32rpx;
@@ -134,6 +134,16 @@ image {
     color: #f66;
 }
 
+@-webkit-keyframes fadeInRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 @keyframes fadeInRight {
     0% {
         transform: translateX(100%);
@@ -141,6 +151,16 @@ image {
 
     100% {
         transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
 

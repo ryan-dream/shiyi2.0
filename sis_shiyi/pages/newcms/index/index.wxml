@@ -1,340 +1,91 @@
 <import src="../../template/tabbar/tabbar.wxml"></import>
 <view class="" style="--color:{{color}};">
-  <view class="box1">
-  <view class="box">
-    <view>
-      <view bindtap="detail" class="playH global" data-id="{{music}}" data-type="music" data-url="../detail/index" wx:if="{{music!=0}}">
-        <image src="../../../resource/images/nav/play.gif"></image>
-      </view>
-    </view>
-    <!-- <view class="top-search-box global">
-      <form bindsubmit="formSubmit">
-        <view class="top-search flex global">
-          <view class="search-inp sub flex">
-            <input class="sub mr10" name="title" placeholder="请输入关键词" value="{{title}}"></input>
-            <button class="iconfont icon-icon117 search-btn" formType="submit"></button>
-          </view>
-        </view>
-      </form>
-    </view> -->
-    <form bindsubmit="formSubmit">
-      <view class="cu-bar search ">
-        <navigator class="cu-avatar round" url="../../user/user_edit/index?id={{userInfo.id}}">
-          <view class="img overflow">
-            <open-data type="userAvatarUrl"></open-data>
-          </view>
-
-        </navigator>
-        <view class="search-form round bg-white">
-          <text class="cuIcon-search"></text>
-          <input name="title" placeholder="请输入关键词" value="{{title}}"></input>
-        </view>
-        <view class="action">
-          <button class="cu-btn  shadow-blur round bg-red" formType="submit">搜索</button>
-        </view>
-      </view>
-    </form>
-
-    <view class="floatBox screen-box" wx:if="{{tk}}">
-      <view class="screen-cont flex flexC">
-        <view class="f18 tc p15">筛选</view>
-        <view class="screen-sort sub">
-          <view class="mb15" wx:for="{{nav.father}}" wx:for-item="v">
-            <view>{{v.name}}</view>
+    <view class="box1">
+        <view class="box">
             <view>
-              <text bindtap="active" class="screen-tag active" data-cid="all" data-fid="{{v.id}}" wx:if="{{cid[v.id]=='noundefined'}}">全部</text>
-              <text bindtap="active" class="{{cid[v.id].length==nav.children[v.id].length&&cid[v.id]!=undefined?'screen-tag active':'screen-tag '}}" data-cid="all" data-fid="{{v.id}}" wx:else>全部</text>
-              <text bindtap="active" class="{{cid[v.id][item.id]?'screen-tag active':'screen-tag '}}" data-cid="{{item.id}}" data-fid="{{v.id}}" wx:for="{{nav.children[ v['id'] ]}}">{{item.name}}</text>
+                <view bindtap="detail" class="playH global" data-id="{{music}}" data-type="music" data-url="../detail/index" wx:if="{{music!=0}}">
+                    <image src="../../../resource/images/nav/play.gif"></image>
+                </view>
             </view>
-          </view>
-        </view>
-        <view class="flex screen-endbtn">
-          <button bindtap="tk" class="sub completeBtn" formType="submit" type="primary">完成</button>
-          <button bindtap="unset" class="sub reset-btn" type="default">重置</button>
-        </view>
-      </view>
-      <view class="floatBox floatBoxBg"></view>
-    </view>
-    <!-- <swiper autoplay="true" circular="true" duration="500" indicatorActiveColor="#fff" indicatorDots="true" interval="5000" wx:if="{{datum.adv.length>0}}">
-      <swiper-item wx:for="{{datum.adv}}">
-        <image bindtap="swiper" class="slide-image" data-appid="{{item.appid}}" data-url="{{item.adv_href}}" data-urlone="{{item.adv_href_one}}" mode="aspectFill" src="{{item.adv_img}}"></image>
-      </swiper-item>
-    </swiper> -->
-    <!-- <view class="cu-bar bg-white margin-top">
-  <view class="action">
-    <text class="cuIcon-title text-pink"></text> 卡片式轮播
-  </view>
-</view> -->
-    <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-      <swiper-item wx:for="{{datum.adv}}" wx:key class="{{cardCur==index?'cur':''}}">
-        <view class="swiper-item">
-          <image bindtap="swiper" class="slide-image" data-appid="{{item.appid}}" data-url="{{item.adv_href}}" data-urlone="{{item.adv_href_one}}" mode="aspectFill" src="{{item.adv_img}}"></image>
-
-        </view>
-      </swiper-item>
-    </swiper>
-    <!-- <view class="cu-bar bg-white margin-top">
-  <view class="action">
-    <text class="cuIcon-title text-pink"></text> 堆叠式轮播
-  </view>
-</view>
-<view class="tower-swiper" bindtouchmove="towerMove" bindtouchstart="towerStart" bindtouchend="towerEnd">
-  <view class="tower-item {{item.zIndex==1?'none':''}}" wx:for="{{datum.adv}}" wx:key style="--index:{{item.zIndex}};--left:{{item.mLeft}}">
-    <view class="swiper-item">
-      <image bindtap="swiper" class="slide-image" data-appid="{{item.appid}}" data-url="{{item.adv_href}}" data-urlone="{{item.adv_href_one}}" mode="aspectFill" src="{{item.adv_img}}"></image>
-    </view>
-  </view>
-</view> -->
-    <view class="content p10">
-      <view class="class f14 tc  bWhite bd8">
-        <view bindtap="more" class="group sub" data-appid="{{item.appid}}" data-path="{{item.path}}" data-url="{{item.link}}" wx:for="{{datum.nav}}">
-          <image class="tabImg" mode="aspectFill" src="{{item.thumb}}"></image>
-          <text class="class-group-tit disb mt10 ys ">{{item.title}}</text>
-        </view>
-      </view>
-      <ad unitId="{{datum.modules.dg_article_flow}}" wx:if="{{datum.modules.dg_article_flow_if==1}}"></ad>
-      <!-- <view class="Recommend bWhite mt10 bd8" wx:if="{{datum.recom.length>0}}">
-        <view class="tit p15 ">
-          <view class="bf global"></view>
-          <text class="f16">{{wxapp_article_hottitle==''?'推荐文章':wxapp_article_hottitle}}</text>
-          <view bindtap="more" class="more fr linght f14" data-types="3">
-            <text>更多</text>
-            <text class="iconfont icon-xiangyoujiantou "></text>
-          </view>
-        </view>
-        <view class="RecommendMin pl15 pr15">
-          <view class="section section_gap">
-            <scroll-view scrollX class="scroll-view_H">
-              <view class="uploadWrap" scrollX="true">
-                <view bindtap="detail" class="scroll-view-item_H" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="1" data-url="../detail/index" wx:if="{{(item.types==3||item.types==4)&&is_pay||item.types==1||item.types==2}}"
-                  wx:for="{{datum.recom}}">
-                  <view class="img imgWh bd3 overflow">
-                    <image mode="aspectFill" src="{{item.thumb}}"></image>
-                    <view class="imgWh-ceng" wx:if="{{item.types==3||item.types==4}}">
-                      <icon class="iconfont icon-bofang3 iconfsize"></icon>
+            <form bindsubmit="formSubmit">
+                <view class="cu-bar search ">
+                    <navigator class="cu-avatar round" url="../../user/user_edit/index?id={{userInfo.id}}">
+                        <view class="img overflow">
+                            <open-data type="userAvatarUrl"></open-data>
+                        </view>
+                    </navigator>
+                    <view class="search-form round bg-white">
+                        <text class="cuIcon-search"></text>
+                        <input name="title" placeholder="请输入关键词" value="{{title}}"></input>
                     </view>
-                  </view>
-                  <view class="f14 lineText2 mt10">{{item.title}}</view>
-                  <view class="f12 lineText linght">{{item.author}}</view>
+                    <view class="action">
+                        <button class="cu-btn  shadow-blur round bg-red" formType="submit">搜索</button>
+                    </view>
                 </view>
-              </view>
-            </scroll-view>
-          </view>
-        </view>
-      </view>
-      <view class="New bWhite mt10 pb15 bd8" wx:if="{{datum.new.length>0}}">
-        <view class="tit p15">
-          <view class="bf global"></view>
-          <text class="f16">{{wxapp_article_newtitle==''?'最新文章':wxapp_article_newtitle}}</text>
-          <view bindtap="more" class="more fr linght f14" data-types="4">
-            <text>更多</text>
-            <text class="iconfont icon-xiangyoujiantou"></text>
-          </view>
-        </view>
-        <view class="NewMin pl15 pr15">
-          <view bindtap="detail" class="NewLi flex gridXb mb15 pb15" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="1" data-url="../detail/index" wx:if="{{(item.types==3||item.types==4)&&is_pay||item.types==1||item.types==2}}"
-            wx:for="{{datum.new}}">
-            <view class="img imgWh bd3 overflow">
-              <image mode="aspectFill" src="{{item.thumb}}"></image>
-              <view class="imgWh-ceng" wx:if="{{item.types==3||item.types==4}}">
-                <icon class="iconfont icon-bofang3 iconfsize"></icon>
-              </view>
+            </form>
+            <view class="floatBox screen-box" wx:if="{{tk}}">
+                <view class="screen-cont flex flexC">
+                    <view class="f18 tc p15">筛选</view>
+                    <view class="screen-sort sub">
+                        <view class="mb15" wx:for="{{nav.father}}" wx:for-item="v">
+                            <view>{{v.name}}</view>
+                            <view>
+                                <text bindtap="active" class="screen-tag active" data-cid="all" data-fid="{{v.id}}" wx:if="{{cid[v.id]=='noundefined'}}">全部</text>
+                                <text bindtap="active" class="{{cid[v.id].length==nav.children[v.id].length&&cid[v.id]!=undefined?'screen-tag active':'screen-tag '}}" data-cid="all" data-fid="{{v.id}}" wx:else>全部</text>
+                                <text bindtap="active" class="{{cid[v.id][item.id]?'screen-tag active':'screen-tag '}}" data-cid="{{item.id}}" data-fid="{{v.id}}" wx:for="{{nav.children[ v['id'] ]}}">{{item.name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="flex screen-endbtn">
+                        <button bindtap="tk" class="sub completeBtn" formType="submit" type="primary">完成</button>
+                        <button bindtap="unset" class="sub reset-btn" type="default">重置</button>
+                    </view>
+                </view>
+                <view class="floatBox floatBoxBg"></view>
             </view>
-            <view class="NewInfo sub ml15  flex-column-c flex flexC">
-              <view class="sub">
-                <view class="lineText2 f14">{{item.title}}</view>
-                <view class="lineText f12 linght" wx:if="{{item.description!='undefined'}}">{{item.description}}</view>
-              </view>
-              <view class="Newicon flex tc linght f12 ">
-                <view class="NewiconLi lineText" wx:if="{{item.author}}">
-                  <text class="iconfont icon-zuozhe"> {{item.author}}</text>
+            <swiper autoplay="true" bindchange="cardSwiper" circular="true" class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" duration="500" indicatorActiveColor="#0081ff" indicatorColor="#8799a3" indicatorDots="true" interval="5000" wx:if="{{datum.adv.length>0}}">
+                <swiper-item class=" {{cardCur==index?'cur':''}}" wx:for="{{datum.adv}}">
+                    <image bindtap="swiper" class="slide-image swiper-item" data-appid="{{item.appid}}" data-url="{{item.adv_href}}" data-urlone="{{item.adv_href_one}}" mode="aspectFil" src="{{item.adv_img}}"></image>
+                </swiper-item>
+            </swiper>
+            <view class="content p10">
+                <view class="class f14 tc  bWhite bd8">
+                    <view bindtap="more" class="group sub" data-appid="{{item.appid}}" data-path="{{item.path}}" data-url="{{item.link}}" wx:for="{{datum.nav}}">
+                        <image class="tabImg" mode="aspectFill" src="{{item.thumb}}"></image>
+                        <text class="class-group-tit disb mt10 ys ">{{item.title}}</text>
+                    </view>
                 </view>
-                <view class="NewiconLi">
-                  <text class="iconfont icon-yanjing"> {{item.clickNum}}</text>
-                </view>
-                <view class="NewiconLi" wx:if="{{is_pay}}">
-                  <text class="iconfont icon-dianzan"> {{item.zanNum}}</text>
-                </view>
-                <view class="NewiconLi red" wx:if="{{item.pay_money>0&&is_pay&&ios!=1}}">
-                  <text class="iconfont icon-icon_jiage_normal"> {{item.pay_money}}</text>
-                </view>
-              </view>
+                <ad unitId="{{datum.modules.sis_article_flow}}" wx:if="{{datum.modules.sis_article_flow_if==1}}"></ad>
             </view>
-          </view>
+            <view class="limit">
+                <view class="cu-bar bg-white solid-bottom " wx:if="{{datum.column.length>0}}">
+                    <view class="action text-grey1 cuIcon-titles text-red">
+                        <text class=" bigfont"> {{wxapp_serialize_newtitle==''?'精选专栏':wxapp_serialize_newtitle}}</text>
+                    </view>
+                    <view bindtap="more" class="more fr linght f14" data-types="5">
+                        <text>更多</text>
+                    </view>
+                </view>
+                <view bindtap="detail" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="2" data-url="../column/column" wx:for="{{datum.column}}">
+                    <view class="cu-card case {{isCard?'no-card':''}} " wx:if="{{datum.column.length>0}}">
+                        <view class="cu-item shadow">
+                            <view class="image" style=" height: 200px;">
+                                <image mode="scaleToFill" src="{{item.serialize_img}}"></image>
+                                <view class="cu-tag bg-blue">{{item.zlwan}}</view>
+                                <view class="cu-bar bg-shadeBottom">
+                                    <text class="text-cut ">{{item.serialize_title}}</text>
+                                    <text class="text-cut cuIcon-like margin-lr-xs">{{item.clickNum}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
-      </view> -->
-      <!-- <view class="New bWhite mt10 pb15 bd8" wx:if="{{datum.column.length>0}}">
-        <view class="tit p15">
-          <view class="bf global"></view>
-          <view class="cu-bar justify-center bg-white">
-            <view class="action sub-title ">
-              <text class="text-xl text-bold text-blue ">{{wxapp_serialize_newtitle==''?'最新专栏':wxapp_serialize_newtitle}}</text>
-              <text class="bg-green" style="width: 3.5rem; height: 0.8rem;border-radius:2px;  "></text>
-
-            </view>
-                          <view bindtap="more" class="more fr linght f14" data-types="5">
-                <text>更多</text>
-                <text class="iconfont icon-xiangyoujiantou"></text>
-              </view>
-          </view>
-
-        </view>
-        
-        <view class="NewMin pl15 pr15">
-          <view bindtap="detail" class="NewLi flex gridXb mb15 pb15" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="2" data-url="../column/column" wx:for="{{datum.column}}">
-            <view class="img imgWh bd3 overflow">
-              <image mode="aspectFill" src="{{item.serialize_img}}"></image>
-            </view>
-            <view class="NewInfo sub ml15  flex-column-c flex flexC">
-              <view class="sub">
-                <view class="lineText2 f14">{{item.serialize_title}}</view>
-                <view class="lineText f12 linght">{{item.ser_type!=2?item.serialize_desc:''}}</view>
-              </view>
-              <view class="Newicon flex tc linght f12 ">
-                <view class="NewiconLi lineText">
-                  <text class="iconfont icon-zuozhe"> {{item.author_nickname}}</text>
-                </view>
-                <view class="NewiconLi">
-                  <text class="iconfont icon-yanjing"> {{item.clickNum}}</text>
-                </view>
-                <view class="NewiconLi red" wx:if="{{item.serialize_price>0&&is_pay&&ios!=1}}">
-                  <text class="iconfont icon-icon_jiage_normal"> {{item.serialize_price}}</text>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view> -->
     </view>
-    <view class="cu-bar bg-white solid-bottom ">
-
-      <view class='action text-grey1'>
-        <text class='cuIcon-titles text-red '></text> <text class=' bigfont'>{{wxapp_serialize_newtitle==''?'精选专栏':wxapp_serialize_newtitle}}</text>
-      </view>
-
-      <!-- <view class='action'>
-        <switch class='sm' checked='{{isCard}}' bindchange='more' data-types="5"></switch>
-
-      </view> -->
-      <view bindtap="more" class="more fr linght f14" data-types="5">
-        <text>更多</text>
-      <!-- <text class="cuIcon-exit"></text> -->
-      </view>
+    <view class="noInfo">
+        <text class="iconfont icon-meiyougengduo disb"></text>
+        <text class="linght disb f12">Study English learn Everything</text>
     </view>
-    <view bindtap="detail" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="2" data-url="../column/column" wx:for="{{datum.column}}">
-      <view class="cu-card case {{isCard?'no-card':''}} " wx:if="{{datum.column.length>0}}">
-
-
-        <view class="cu-item shadow">
-          <view class="image" style=" height: 200px;">
-            <image src="{{item.serialize_img}}" mode="scaleToFill"></image>
-            <view class="cu-tag bg-blue">精选</view>
-            <view class="cu-bar bg-shadeBottom">
-              <text class="text-cut ">{{item.serialize_title}}</text>
-              <text class="text-cut cuIcon-like margin-lr-xs">{{item.clickNum}}</text>
-
-            </view>
-          </view>
-          <!-- <view class="cu-list menu-avatar">
-            <view class="cu-item">
-              <view class="cu-avatar round lg" style="background-image:url({{item.author_avatar}});"></view>
-              <view class="content sub">
-                <view class="text-grey1">{{item.author_nickname}}</view>
-                <view class="text-gray1 text-sm flex justify-between1">
-                  十天前
-                  <view class="text-gray1 text-sm1 shiyitext">
-                    {{item.clickNum}}名小伙伴
-                    <text class="cuIcon-like margin-lr-xs"></text>THIS专栏
-                    <text class="cuIcon-appreciatefill margin-lr-xs"></text> 2000
-              <text class="cuIcon-messagefill margin-lr-xs"></text> 3000
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view> -->
-        </view>
-      </view>
-    </view>
-    <!-- <view class="cu-bar bg-white solid-bottom" >
-
-  <view class='action'>
-    <text class='cuIcon-titles text-orange '></text> {{wxapp_article_newtitle==''?'最新文章':wxapp_article_newtitle}}
-  </view>
-
-  <view class='action' >
-    <switch class='sm' checked='{{isCard}}' bindchange='more' data-types="5"></switch>
-    
-  </view>
-</view>
-       <view class="NewMin pl15 pr15">
-          <view bindtap="detail" class="NewLi flex gridXb mb15 pb15" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="1" data-url="../detail/index" wx:if="{{(item.types==3||item.types==4)&&is_pay||item.types==1||item.types==2}}"wx:for="{{datum.new}}">
-            <view class="img imgWh bd3 overflow">
-              <image mode="aspectFill" src="{{item.thumb}}"></image>
-              <view class="imgWh-ceng" wx:if="{{item.types==3||item.types==4}}">
-                <icon class="iconfont icon-bofang3 iconfsize"></icon>
-              </view>
-            </view>
-            <view class="NewInfo sub ml15  flex-column-c flex flexC">
-              <view class="sub">
-                <view class="lineText2 f14">{{item.title}}</view>
-                <view class="lineText f12 linght" wx:if="{{item.description!='undefined'}}">{{item.description}}</view>
-              </view>
-              <view class="Newicon flex tc linght f12 ">
-                <view class="NewiconLi lineText" wx:if="{{item.author}}">
-                  <text class="iconfont icon-zuozhe"> {{item.author}}</text>
-                </view>
-                <view class="NewiconLi">
-                  <text class="iconfont icon-yanjing"> {{item.clickNum}}</text>
-                </view>
-                <view class="NewiconLi" wx:if="{{is_pay}}">
-                  <text class="iconfont icon-dianzan"> {{item.zanNum}}</text>
-                </view>
-                <view class="NewiconLi red" wx:if="{{item.pay_money>0&&is_pay&&ios!=1}}">
-                  <text class="iconfont icon-icon_jiage_normal"> {{item.pay_money}}</text>
-                </view>
-</view>
-</view>
-</view>
-</view> -->
-
-    <!-- <view class="cu-bar bg-white solid-bottom">
-      <view class='action'>
-        <text class='cuIcon-titles text-red '></text><text class='bigfont ' >{{wxapp_article_newtitle==''?'最新文章':wxapp_article_newtitle}}</text> 
-      </view>
-      <view class='action'>
-        <switch class='sm' checked='{{isCard}}' bindchange='more' data-types="4"></switch>
-      </view>
-    </view>
-    <view bindtap="more" class="more fr linght f14" data-types="4">
-      <text >更多</text>
-      <text class="cuIcon-exit"></text>
-    </view>
-  </view>
-  <view bindtap="detail" data-authorid="{{item.author_id}}" data-id="{{item.id}}" data-pay="{{item.pay_money}}" data-type="1" data-url="../detail/index" wx:if="{{(item.types==3||item.types==4)&&is_pay||item.types==1||item.types==2}}" wx:for="{{datum.new}}">
-    <view class="cu-card1 article {{isCard?'no-card':''}}">
-      <view class="cu-item shadow">
-        <view class="title">
-          <view class="text-cut">{{item.title}}</view>
-        </view>
-        <view class="content">
-          <image src="{{item.thumb}}" mode="aspectFill"></image>
-          <view class="desc">
-            <view class="text-content" wx:if="{{item.description!='undefined'}}">{{item.description}}</view>
-            <view>
-              <view class="cu-tag bg-red light sm round">{{item.author}}</view>
-              <view class="cu-tag bg-green light sm round iconfont icon-dianzan ">{{item.zanNum}}</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view> -->
-  </view>
-
-</view>
-  <view class="noInfo">
-    <text class="iconfont icon-meiyougengduo disb"></text>
-    <text class="linght disb f12">我是底部</text>
-  </view>
-  <template is="tabbar" data="{{index_t:1,tabbar:tabbar,tabbarcolor:tabbarcolor,textcolor:textcolor}}"></template>
+    <template is="tabbar" data="{{index_t:1,tabbar:tabbar,tabbarcolor:tabbarcolor,textcolor:textcolor}}"></template>
 </view>

@@ -1,26 +1,25 @@
+@import "../../../../wuBaseWxss/4.wxss";
+
+@import "../../../../wuBaseWxss/1.wxss";
+
 @import "../../../../wuBaseWxss/0.wxss";
-@import "../../shiyiUI/main.wxss";
-@import "../../shiyiUI/icon.wxss";
 
-.text-cut{
-   padding: 0;
-
+.text-cut {
+    padding: 0;
 }
 
-
-
-.bigfont{
-
-  font-weight: 700;
-  font-size: 18px;
+.bigfont {
+    font-weight: 700;
+    font-size: 18px;
+    color: #757575;
 }
 
-
-.ys{
-  color: #ef6e5f;
+.ys {
+    color: #ef6e5f;
 }
-.box1{
-  background-color: #fff;
+
+.box1 {
+    background-color: #fff;
 }
 
 .top-search-box {
@@ -147,6 +146,16 @@ button.completeBtn {
     background-color: #07BB45;
 }
 
+@-webkit-keyframes fadeInRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 @keyframes fadeInRight {
     0% {
         transform: translateX(100%);
@@ -154,6 +163,16 @@ button.completeBtn {
 
     100% {
         transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
 
@@ -175,7 +194,6 @@ button.completeBtn {
 .swiper-box .wx-swiper-dots.wx-swiper-dots-horizontal {
     margin-bottom: 2rpx;
     margin-top: 2rpx;
-
 }
 
 .swiper-box .wx-swiper-dot {
@@ -243,7 +261,7 @@ button.completeBtn {
 }
 
 .group {
-    padding: 20rpx 0 10rpx 0;
+    padding: 20rpx 0 20rpx 0;
     width: 25%;
 }
 
@@ -519,86 +537,84 @@ button.completeBtn {
 }
 
 .text-xl {
-	font-size: 36rpx;
+    font-size: 36rpx;
 }
 
 .text-bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
-.text-green,
-.line-green,
-.lines-green {
-	color: green;
+.text-green,.line-green,.lines-green {
+    color: green;
 }
 
 .bg-green {
-	background-color: green;
-	color: green;
-}
-.cu-bar {
-	display: flex;
-	position: relative;
-	align-items: center;
-	min-height: 100rpx;
-	justify-content: space-between;
+    background-color: green;
+    color: green;
 }
 
-.cu-bar.justify-center .action.border-title text:last-child,
-.cu-bar.justify-center .action.sub-title text:last-child {
-	left: 0;
-	right: 0;
-	margin: auto;
-	text-align: center;
+.cu-bar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    min-height: 100rpx;
+    justify-content: space-between;
 }
+
+.cu-bar.justify-center .action.border-title text:last-child,.cu-bar.justify-center .action.sub-title text:last-child {
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
 .justify-center {
-	justify-content: center;
+    justify-content: center;
 }
 
 .bg-white {
-	background-color: white;
-	
+    background-color: white;
 }
+
 .cu-bar .action.sub-title {
-	position: relative;
-	top: -0.2rem;
+    position: relative;
+    top: -0.2rem;
 }
 
 .cu-bar .action.sub-title text {
-	position: relative;
-	z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .cu-bar .action.sub-title text[class*="bg-"]:last-child {
-	position: absolute;
-	display: inline-block;
-	bottom: -0.2rem;
-	border-radius: 6rpx;
-	width: 100%;
-	height: 0.6rem;
-	left: 0.6rem;
-	opacity: 0.3;
-	z-index: 0;
+    position: absolute;
+    display: inline-block;
+    bottom: -0.2rem;
+    border-radius: 6rpx;
+    width: 100%;
+    height: 0.6rem;
+    left: 0.6rem;
+    opacity: 0.3;
+    z-index: 0;
 }
 
 .cu-bar .action.sub-title text[class*="text-"]:last-child {
-	position: absolute;
-	display: inline-block;
-	bottom: -0.7rem;
-	left: 0.5rem;
-	opacity: 0.2;
-	z-index: 0;
-	text-align: right;
-	font-weight: 900;
-	font-size: 36rpx;
+    position: absolute;
+    display: inline-block;
+    bottom: -0.7rem;
+    left: 0.5rem;
+    opacity: 0.2;
+    z-index: 0;
+    text-align: right;
+    font-weight: 900;
+    font-size: 36rpx;
 }
 
-.cu-bar.justify-center .action.border-title text:last-child,
-.cu-bar.justify-center .action.sub-title text:last-child {
-	left: 0;
-	right: 0;
-	margin: auto;
-	text-align: center;
+.cu-bar.justify-center .action.border-title text:last-child,.cu-bar.justify-center .action.sub-title text:last-child {
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
 }
 
 .navTab {
@@ -628,6 +644,5 @@ button.completeBtn {
 }
 
 .img {
-
     border-radius: 50%;
 }

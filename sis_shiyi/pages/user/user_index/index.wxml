@@ -27,8 +27,8 @@
             到期时间：{{userInfo.end_time==-1?'永久有效':userInfo.end_time_day}}
           </view>
                     <view class="btn   blank bd3 tc global" wx:if="{{userInfo.end_time==-1&&userInfo.info_status==2}}">
-              永久会员
-            </view>
+            永久会员
+          </view>
                     <block wx:else>
                         <view bindtap="tk" class="btn blank bd3 tc global" wx:if="{{userInfo.info_status==2&&userInfo.end_time&&userInfo.end_time>timestamp}}">
               续费
@@ -41,20 +41,29 @@
             </view>
             <block wx:if="{{userInfo}}">
                 <view class="myList f14" wx:if="{{is_pay}}">
-            <view class="title flex">
-            <view class="line"></view>
-            <view bindtap="active" class="titCon disb f18">阅读服务</view>
-            <view class="line lineRg"></view>
-        </view>
-        
-
-
+                    <view class="title flex">
+                        <view class="line"></view>
+                        <view bindtap="active" class="titCon disb f18">阅读服务</view>
+                        <view class="line lineRg"></view>
+                    </view>
                     <view class="myUl bWhite bd8 tc clearfix">
-                            <view bindtap="linkto" class="myLi pt15 pb15" data-url="/sis_shiyi/pages/newcms/aboutme/index?id=55">
-                            <icon class="iconfont icon-xing disb f30 pb10 iconglobal"></icon>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-url="/sis_shiyi/pages/newcms/aboutme/index?id=55">
+                            <icon class="iconfont icon-yaoqingma1 disb f30 pb10 iconglobal"></icon>
               关于拾一
             </view>
-                        <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit/index">
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="2" data-url="../user_articelList/index">
+                            <icon class="iconfont icon-fufeifenxi disb f30 pb10 iconglobal"></icon>
+              已购买
+            </view>
+                                    <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit_author/index" wx:if="{{userInfo.author}}">
+                            <icon class="iconfont icon-shouyi- disb f30 pb10 iconglobal"></icon>
+              我的收益
+            </view>
+                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="3" data-url="../user_articelList/index">
+                            <icon class="iconfont icon-shoucang disb f30 pb10 iconglobal"></icon>
+              我的收藏
+            </view>
+            <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit/index">
                             <icon class="iconfont icon-tubiao212 disb f30 pb10 iconglobal"></icon>
               分享收益
             </view>
@@ -66,10 +75,11 @@
                 </view>
                             </button>
                         </form>
-                        <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_shareProfit_author/index" wx:if="{{userInfo.author}}">
-                            <icon class="iconfont icon-shouyi- disb f30 pb10 iconglobal"></icon>
-              我的收益
+                                    <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_coupon/index">
+                            <icon class="iconfont icon-youhuiquan-copy disb f30 pb10 iconglobal"></icon>
+              优惠卷
             </view>
+
                         <view bindtap="artPushWay" class="myLi pt15 pb15" data-url="../user_publish/index" wx:if="{{userInfo.author}}">
                             <icon class="iconfont icon-wenzhang1 disb f30 pb10 iconglobal"></icon>
               发布文章
@@ -78,26 +88,15 @@
                             <icon class="iconfont icon-wenzhang1 disb f30 pb10 iconglobal"></icon>
               我的文章
             </view>
-                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="2" data-url="../user_articelList/index">
-                            <icon class="iconfont icon-fufeifenxi disb f30 pb10 iconglobal"></icon>
-              已购买
-            </view>
-                        <view bindtap="linkto" class="myLi pt15 pb15" data-types="3" data-url="../user_articelList/index">
-                            <icon class="iconfont icon-shoucang disb f30 pb10 iconglobal"></icon>
-              我的收藏
-            </view>
-                        <!-- <view bindtap="linkto" class="myLi pt15 pb15" data-url="../user_myInventCard/index">
-                            <icon class="iconfont icon-yaoqingma1 disb f30 pb10 iconglobal"></icon>
-              我的邀请卡
-            </view>
+
                         <view class="myLi">
-                            <button class="shenqing-author-btn" openType="openSetting">
+                            <button class="shenqing-author-btn" openType="feedback">
                                 <view class="pt15 pb15">
-                                    <icon class="iconfont icon-shouquan disb f30 pb10 iconglobal"></icon>
-                  授权设置
+                                    <icon class="iconfont icon-zuozhe disb f30 pb10 iconglobal"></icon>
+                  建议反馈
                 </view>
                             </button>
-                        </view> -->
+                        </view>
                     </view>
                 </view>
             </block>
@@ -119,7 +118,7 @@
                 <radio-group>
                     <label bindtap="select" class="label" data-day="{{item.day}}" data-id="{{item.id}}" data-mo="{{item.money}}" wx:for="{{datum}}">
                         <radio></radio>{{item.title}}
-            </label>
+          </label>
                     <label bindtap="select" class="label" data-convert="1" wx:if="{{vipCon==1}}">
                         <radio></radio>使用VIP兑换券
           </label>

@@ -1,4 +1,4 @@
-@import "../../../../wuBaseWxss/0.wxss";
+@import "../../../../wuBaseWxss/4.wxss";
 
 page {
     background-color: #fff;

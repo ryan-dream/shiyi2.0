@@ -1,4 +1,7 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+getApp(), require("../../../resource/js/util.js"), require("../../../resource/utils/underscore"), 
+require("../../../resource/wxParse/wxParse.js");
+
+var t = require("../../../resource/function/function.js");
 
 Page({
     data: {
@@ -19,16 +22,16 @@ Page({
         types: 0,
         is_pay: !1
     },
-    onLoad: function(t) {
-        _function.system(this), this.setData({
-            types: t.type,
-            title: t.title,
-            cid: t.cid,
-            pid: t.pid
+    onLoad: function(a) {
+        t.system(this), this.setData({
+            types: a.type,
+            title: a.title,
+            cid: a.cid,
+            pid: a.pid
         }), this.getTitle();
-        var a = wx.getStorageSync("is_pay");
+        var e = wx.getStorageSync("is_pay");
         this.setData({
-            is_pay: 1 == a
+            is_pay: 1 == e
         });
     },
     onPullDownRefresh: function() {
@@ -41,9 +44,9 @@ Page({
             ps: parseInt(this.data.ps) + 1
         }), this.getTitle(2);
     },
-    getTitle: function(i) {
-        var s = this;
-        _function.request("entry/wxapp/SearchTitleTwo", {
+    getTitle: function(a) {
+        var e = this;
+        t.request("entry/wxapp/SearchTitleTwo", {
             p: this.data.p,
             pnum: this.data.pnum,
             ps: this.data.ps,
@@ -53,36 +56,32 @@ Page({
             pid: this.data.pid,
             types: this.data.types
         }, "", function(t) {
-            if (console.log(55555, t), 2 != i) {
-                var a = s.data.datum_s, e = s.data.datum_a;
-                a = 1 == s.data.p ? t.s.data || [] : a.concat(t.s.data || []), e = 1 == s.data.p ? t.a.data || [] : e.concat(t.a.data || []), 
-                s.setData({
-                    datum_s: a,
-                    datum_a: e,
+            if (console.log(55555, t), 2 != a) {
+                var s = e.data.datum_s, i = e.data.datum_a;
+                s = 1 == e.data.p ? t.s.data || [] : s.concat(t.s.data || []), i = 1 == e.data.p ? t.a.data || [] : i.concat(t.a.data || []), 
+                e.setData({
+                    datum_s: s,
+                    datum_a: i,
                     nav: t.category,
-                    hint: "抱歉，搜索无该文章^_^!",
+                    hint: "持续更新中，敬请期待^_^!",
                     total_s: t.s.total,
                     total_a: t.a.total,
-                    loader_a: e.length == t.a.total ? "没有更多啦！" : "",
-                    loader_s: a.length == t.s.total ? "没有更多啦！" : ""
+                    loader_a: i.length == t.a.total ? "持续更新中，敬请期待^_^!" : "",
+                    loader_s: s.length == t.s.total ? "持续更新中，敬请期待^_^!" : ""
                 });
-            } else if (s.data.change) {
-                e = s.data.datum_a;
-                e = 1 == s.data.p ? t.a.data || [] : e.concat(t.a.data || []), s.setData({
-                    datum_a: e,
-                    hint: "抱歉，搜索无该文章^_^!",
-                    total_a: t.a.total,
-                    loader_a: e.length == t.a.total ? "没有更多啦！" : ""
-                });
-            } else {
-                a = s.data.datum_s;
-                a = 1 == s.data.ps ? t.s.data || [] : a.concat(t.s.data || []), s.setData({
-                    datum_s: a,
-                    hint: "抱歉，搜索无该文章^_^!",
-                    total_s: t.s.total,
-                    loader_s: a.length == t.s.total ? "没有更多啦！" : ""
-                });
-            }
+            } else e.data.change ? (i = e.data.datum_a, i = 1 == e.data.p ? t.a.data || [] : i.concat(t.a.data || []), 
+            e.setData({
+                datum_a: i,
+                hint: "持续更新中，敬请期待^_^!",
+                total_a: t.a.total,
+                loader_a: i.length == t.a.total ? "持续更新中，敬请期待^_^!" : ""
+            })) : (s = e.data.datum_s, s = 1 == e.data.ps ? t.s.data || [] : s.concat(t.s.data || []), 
+            e.setData({
+                datum_s: s,
+                hint: "持续更新中，敬请期待^_^!",
+                total_s: t.s.total,
+                loader_s: s.length == t.s.total ? "持续更新中，敬请期待^_^!" : ""
+            }));
         }, this);
     },
     change: function() {
@@ -90,25 +89,25 @@ Page({
             change: !this.data.change
         });
     },
-    detail: function(t) {
-        var a = t.currentTarget.dataset.id, e = t.currentTarget.dataset.url, i = t.currentTarget.dataset.type, s = wx.getStorageSync("userInfo");
+    detail: function(a) {
+        var e = a.currentTarget.dataset.id, s = a.currentTarget.dataset.url, i = a.currentTarget.dataset.type, d = wx.getStorageSync("userInfo");
         this.setData({
-            uid: s.id
-        }), s ? this.detailTwo(a, e, i, this.data.uid) : _function.getUserinfo(this);
+            uid: d.id
+        }), d ? this.detailTwo(e, s, i, this.data.uid) : t.getUserinfo(this);
     },
     index: function() {
         wx.redirectTo({
             url: "../index/index"
         });
     },
-    detailTwo: function(a, e, t, i) {
-        2 == t ? wx.navigateTo({
+    detailTwo: function(a, e, s, i) {
+        2 == s ? wx.navigateTo({
             url: e + "?id=" + a
-        }) : _function.request("entry/wxapp/Judge", {
+        }) : t.request("entry/wxapp/Judge", {
             uid: i,
             id: a
-        }, "", function(t) {
-            0 == t ? _function.hint(3, "抱歉,该文章仅限指定分组用户阅览^_^!", "温馨提示", function(t) {}) : wx.navigateTo({
+        }, "", function(s) {
+            0 == s ? t.hint(3, "抱歉,该文章仅限指定分组用户阅览^_^!", "温馨提示", function(t) {}) : wx.navigateTo({
                 url: e + "?id=" + a
             });
         }, this);

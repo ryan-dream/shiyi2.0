@@ -1,10 +1,17 @@
 <import src="../../../resource/wxParse/wxParse.wxml"></import>
 <view bindscroll="scroll" class="page-scroll" onReachBottom="getMore" scrollTop="{{scrollTop}}" scrollY="true">
+    <view></view>
+    <view class="navTab">
+        <view catchtap="showContent" class="navItem {{contentHidden==false?'navSelected':''}}">原文</view>
+        <view catchtap="showArticle" class="navItem {{articleHidden==false?'navSelected':''}}">讲解</view>
+    </view>
     <view class="Chapter">
         <view class="ChapterMin p15">
-            <text class="f20">第{{datum.displayorder}}章 {{datum.title}}</text>
-            <view class="info mt15 inforpadding">
+            <view class="art-content f14" hidden="{{contentHidden}}">
                 <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+            </view>
+            <view class="art-content f14" hidden="{{articleHidden}}">
+                <template is="wxParse" data="{{wxParseData:explain2.nodes}}"></template>
             </view>
             <view class="conBtn flex hi40 tc">
                 <text class="sub" wx:if="{{datum.displayorder==1}}">第一章</text>

@@ -1,3 +1,5 @@
+@import "../../../../wuBaseWxss/4.wxss";
+
 @import "../../../../wuBaseWxss/0.wxss";
 
 .title {
@@ -28,6 +30,7 @@
 .lineRg::before {
     left: -8rpx;
 }
+
 .my::before {
     content: '';
     display: block;

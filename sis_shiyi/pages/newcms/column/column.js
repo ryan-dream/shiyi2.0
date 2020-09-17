@@ -1,4 +1,5 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+var t = getApp(), e = (require("../../../resource/js/util.js"), require("../../../resource/utils/underscore"), 
+require("../../../resource/wxParse/wxParse.js")), a = require("../../../resource/function/function.js");
 
 Page({
     data: {
@@ -17,22 +18,23 @@ Page({
         collect: 0,
         is_pay: 0,
         serialize_desc_show: !1,
+        shareMenuHidden: !0,
         ios: "",
         serAetList: [],
         lOrd: 2
     },
-    onLoad: function(t) {
-        _function.system(this), t.fxid && t.fxtype && wx.setStorageSync("fxid", t.fxid);
-        var e = wx.getStorageSync("is_pay");
+    onLoad: function(e) {
+        a.system(this), e.fxid && e.fxtype && wx.setStorageSync("fxid", e.fxid);
+        var i = wx.getStorageSync("is_pay");
         this.setData({
-            id: t.id,
-            is_pay: 1 == e,
-            ios: app.globalData.MobileSystem
+            id: e.id,
+            is_pay: 1 == i,
+            ios: t.globalData.MobileSystem
         });
-        var a = wx.getStorageSync("userInfo");
-        a ? (this.setData({
-            userInfo: a
-        }), this.getDatum(t.id, 1)) : _function.getUserinfo(this);
+        var s = wx.getStorageSync("userInfo");
+        s ? (this.setData({
+            userInfo: s
+        }), this.getDatum(e.id, 1)) : a.getUserinfo(this);
     },
     onPullDownRefresh: function() {
         this.setData({
@@ -49,15 +51,15 @@ Page({
         1 == t ? this.getDatum(this.data.id, 2) : 2 == t && this.getSerArtList();
     },
     getDatum: function(t, i) {
-        var n = this;
-        1 == this.data.ismore && _function.request("entry/wxapp/ColumnDetail", {
+        var s = this;
+        1 == this.data.ismore && a.request("entry/wxapp/ColumnDetail", {
             id: t,
             p: this.data.p,
             pnum: this.data.pnum,
             types: i,
             openid: this.data.userInfo.openid
         }, "", function(t) {
-            if (console.log("数据", t), 1 == i) n.setData({
+            if (console.log("数据", t), 1 == i) s.setData({
                 datum: t,
                 collect: t.collect,
                 member: t.member,
@@ -66,29 +68,32 @@ Page({
                 comment: t.comment,
                 total: t.total
             }); else {
-                var e = n.data.comment;
-                e = 1 == n.data.p ? t.comment || [] : e.concat(t.comment || []), n.setData({
-                    comment: e,
-                    ismore: e.length != n.data.total
+                var a = s.data.comment;
+                a = 1 == s.data.p ? t.comment || [] : a.concat(t.comment || []), s.setData({
+                    comment: a,
+                    ismore: a.length != s.data.total
                 });
             }
-            var a = 2 == i ? 1 : t.serialize.ser_type ? t.serialize.ser_type : "";
-            console.log("类型", a), 2 == a && (WxParse.wxParse("serialize_desc_2", "html", t.serialize.serialize_desc, n), 
-            n.getSerArtList());
+            var n = 2 == i ? 1 : t.serialize.ser_type ? t.serialize.ser_type : "";
+            console.log("类型", n), 2 == n && (e.wxParse("serialize_desc_2", "html", t.serialize.serialize_desc, s), 
+            s.getSerArtList()), console.log("类型", n), 2 == n && (e.wxParse("serialize_pay_2", "html", t.serialize.serialize_pay, s), 
+            s.getSerArtList()), console.log("类型", n), 1 == n && (e.wxParse("serialize_desc_show", "html", t.serialize.serialize_desc, s), 
+            s.getSerArtList()), console.log("类型", n), 1 == n && (e.wxParse("serialize_pay", "html", t.serialize.serialize_pay, s), 
+            s.getSerArtList());
         }, this);
     },
     collect: function(t) {
-        var e = this, a = t.currentTarget.dataset.types;
-        _function.request("entry/wxapp/Zancollect", {
+        var e = this, i = t.currentTarget.dataset.types;
+        a.request("entry/wxapp/Zancollect", {
             id: this.data.id,
             openid: this.data.userInfo.openid,
-            types: a
+            types: i
         }, "", function(t) {
-            5 == a && t ? e.setData({
+            5 == i && t ? e.setData({
                 collect: 0
-            }) : 6 == a && t ? e.setData({
+            }) : 6 == i && t ? e.setData({
                 collect: e.data.id
-            }) : _function.hint(1, "网络错误！", 2e3, function(t) {});
+            }) : a.hint(1, "网络错误！", 2e3, function(t) {});
         }, this);
     },
     linkto: function(t) {
@@ -103,35 +108,34 @@ Page({
         });
     },
     formSubmit: function(t) {
-        var e = this, a = t.detail.value.content, i = t.detail.formId;
-        if ("" == a) return _function.hint(3, "对不起，请输入评论内容^_^!", "温馨提示", function(t) {}), 
-        !1;
-        _function.request("entry/wxapp/Message", {
+        var e = this, i = t.detail.value.content, s = t.detail.formId;
+        if ("" == i) return a.hint(3, "对不起，请输入评论内容^_^!", "温馨提示", function(t) {}), !1;
+        a.request("entry/wxapp/Message", {
             id: this.data.id,
-            content: a,
+            content: i,
             openid: this.data.userInfo.openid,
             uid: this.data.userInfo.id,
             nickname: this.data.userInfo.nickname,
             avatar: this.data.userInfo.avatar,
             types: 1,
-            formId: i
+            formId: s
         }, "", function(t) {
-            console.log(t), 1 == t ? _function.hint(3, "评论成功^_^!", "温馨提示", function(t) {}) : 4 == t && _function.hint(3, "评论失败^_^!", "温馨提示", function(t) {}), 
+            console.log(t), 1 == t ? a.hint(3, "评论成功^_^!", "温馨提示", function(t) {}) : 4 == t && a.hint(3, "评论失败^_^!", "温馨提示", function(t) {}), 
             e.setData({
                 tk: !e.data.tk
             });
         }, this);
     },
     pay: function(t) {
-        var e = this, a = this.data.datum.serialize.serialize_price, i = wx.getStorageSync("fxid");
-        _function.request("entry/wxapp/Pay", {
+        var e = this, i = this.data.datum.serialize.serialize_price, s = wx.getStorageSync("fxid");
+        a.request("entry/wxapp/Pay", {
             id: this.data.id,
             author_openid: this.data.datum.serialize.author_openid,
             uid: this.data.userInfo.id,
             openid: this.data.userInfo.openid,
-            money: a,
+            money: i,
             types: 2,
-            fxid: i
+            fxid: s
         }, "", function(t) {
             console.log(t), 1 == t.state ? wx.requestPayment({
                 timeStamp: t.timeStamp,
@@ -146,9 +150,9 @@ Page({
                     }), e.getDatum(e.data.id, 1);
                 },
                 fail: function(t) {
-                    _function.hint(3, "支付失败^_^!", "网络提示", function(t) {});
+                    a.hint(3, "支付失败^_^!", "网络提示", function(t) {});
                 }
-            }) : _function.hint(1, "网络错误！", "", function(t) {});
+            }) : a.hint(1, "网络错误！", "", function(t) {});
         }, this);
     },
     serialize_desc_show: function(t) {
@@ -165,11 +169,37 @@ Page({
         var t = wx.getStorageSync("share_title"), e = this.data.datum.serialize.serialize_title;
         return this.data.userInfo.id ? {
             title: t && e ? e : t,
-            path: "sis_shiyi/pages/newcms/column/column?id=" + this.data.id + "&fxid=" + this.data.userInfo.id + "&fxtype=fx"
+            path: "sis_shiyi/pages/newcms/column/column?id=" + this.data.id + "&fxid=" + this.data.userInfo.id + "&fxtype=fx",
+            success: function(t) {
+                wx.showToast({
+                    title: "转发成功",
+                    icon: "success",
+                    duration: 1e3,
+                    mask: !0
+                });
+            }
         } : {
             title: t && e ? e : t,
-            path: "sis_shiyi/pages/newcms/column/column?id=" + this.data.id
+            path: "sis_shiyi/pages/newcms/column/column?id=" + this.data.id,
+            success: function(t) {
+                wx.showToast({
+                    title: "转发成功",
+                    icon: "success",
+                    duration: 1e3,
+                    mask: !0
+                });
+            }
         };
+    },
+    shareMenu: function() {
+        this.setData({
+            shareMenuHidden: !1
+        });
+    },
+    CloseShareMenu: function() {
+        this.setData({
+            shareMenuHidden: !0
+        });
     },
     iosbuy: function() {
         return wx.showModal({
@@ -178,21 +208,21 @@ Page({
         }), !1;
     },
     getSerArtList: function() {
-        var a = this, t = {
-            p: a.data.p,
-            pnum: a.data.pnum,
-            serid: a.data.id,
-            openid: a.data.userInfo.openid
+        var t = this, e = {
+            p: t.data.p,
+            pnum: t.data.pnum,
+            serid: t.data.id,
+            openid: t.data.userInfo.openid
         };
-        _function.request("entry/wxapp/getSerArtListData", t, "", function(t) {
-            console.log("文章类专栏列表数据", t);
-            var e = a.data.serAetList;
-            e = 1 == a.data.p ? t.data || [] : e.concat(t.data || []), a.setData({
-                total: t.total,
-                serAetList: e,
-                ismore: e.length != a.data.total
+        a.request("entry/wxapp/getSerArtListData", e, "", function(e) {
+            console.log("文章类专栏列表数据", e);
+            var a = t.data.serAetList;
+            a = 1 == t.data.p ? e.data || [] : a.concat(e.data || []), t.setData({
+                total: e.total,
+                serAetList: a,
+                ismore: a.length != t.data.total
             });
-        }, a);
+        }, t);
     },
     listOrDes: function(t) {
         console.log(t);

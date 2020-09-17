@@ -1,4 +1,4 @@
-@import "../../../../wuBaseWxss/0.wxss";
+@import "../../../../wuBaseWxss/4.wxss";
 
 .Catalog::before {
     content: '';
@@ -37,6 +37,16 @@
     display: inline-block;
     border-radius: 50%;
     vertical-align: -5px;
+}
+
+@-webkit-keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes loading {

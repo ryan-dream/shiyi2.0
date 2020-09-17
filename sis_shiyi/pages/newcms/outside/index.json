@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "拾一英语",
     "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "usingComponents": {}
 }

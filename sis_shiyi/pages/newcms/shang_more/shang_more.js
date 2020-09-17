@@ -1,4 +1,7 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+getApp(), require("../../../resource/js/util.js"), require("../../../resource/utils/underscore"), 
+require("../../../resource/wxParse/wxParse.js");
+
+var t = require("../../../resource/function/function.js");
 
 Page({
     data: {
@@ -14,18 +17,18 @@ Page({
             id: t.id
         }), this.getaAuthorInfo(t.author_id);
     },
-    setUserInfo: function(t) {
-        var n = wx.getStorageSync("userInfo");
-        n ? this.setData({
-            userInfo: n
-        }) : _function.getUserinfo(this);
+    setUserInfo: function(n) {
+        var a = wx.getStorageSync("userInfo");
+        a ? this.setData({
+            userInfo: a
+        }) : t.getUserinfo(this);
     },
-    getaAuthorInfo: function(t) {
-        var n = this;
-        _function.request("entry/wxapp/getaAuthorInfo", {
-            author_id: t
+    getaAuthorInfo: function(n) {
+        var a = this;
+        t.request("entry/wxapp/getaAuthorInfo", {
+            author_id: n
         }, "", function(t) {
-            n.setData({
+            a.setData({
                 authorInfo: t
             });
         }, this);
@@ -36,39 +39,38 @@ Page({
         });
     },
     shangPay: function() {
-        var a = this, t = this.data.rmbInp;
-        return "" == t ? (_function.hint(3, "对不起，请输入打赏金额^_^!", "温馨提示", function(t) {}), 
-        !1) : this.data.id && this.data.userInfo && this.data.authorInfo ? void _function.request("entry/wxapp/Shang", {
+        var n = this, a = this.data.rmbInp;
+        return "" == a ? (t.hint(3, "对不起，请输入打赏金额^_^!", "温馨提示", function(t) {}), !1) : this.data.id && this.data.userInfo && this.data.authorInfo ? void t.request("entry/wxapp/Shang", {
             id: this.data.id,
-            shang_money: t,
+            shang_money: a,
             uid: this.data.userInfo.id,
             openid: this.data.userInfo.openid,
             avatar: this.data.userInfo.avatar,
             author_id: this.data.authorInfo.id
-        }, "", function(t) {
-            if (1 == t.state) {
-                var n = a;
+        }, "", function(a) {
+            if (1 == a.state) {
+                var e = n;
                 wx.requestPayment({
-                    timeStamp: t.timeStamp,
-                    nonceStr: t.nonceStr,
-                    package: t.package,
+                    timeStamp: a.timeStamp,
+                    nonceStr: a.nonceStr,
+                    package: a.package,
                     signType: "MD5",
-                    paySign: t.paySign,
-                    success: function(t) {
-                        _function.hint(3, "打赏成功^_^!", "温馨提示！", function(t) {}), _function.request("entry/wxapp/Detail", {
-                            id: n.data.id,
+                    paySign: a.paySign,
+                    success: function(n) {
+                        t.hint(3, "打赏成功^_^!", "温馨提示！", function(t) {}), t.request("entry/wxapp/Detail", {
+                            id: e.data.id,
                             types: "shang"
                         }, "", function(t) {
-                            n.setData({
+                            e.setData({
                                 shang_num: t
                             });
                         }, this);
                     },
-                    fail: function(t) {
-                        _function.hint(3, "打赏失败^_^!", "网络提示", function(t) {});
+                    fail: function(n) {
+                        t.hint(3, "打赏失败^_^!", "网络提示", function(t) {});
                     }
                 });
-            } else _function.hint(3, "网络错误，请稍后重试—_—!", "温馨提示！", function(t) {});
-        }, this) : (_function.hint(3, "对不起，出错了，请返回上一页重新操作!", "温馨提示", function(t) {}), !1);
+            } else t.hint(3, "网络错误，请稍后重试—_—!", "温馨提示！", function(t) {});
+        }, this) : (t.hint(3, "对不起，出错了，请返回上一页重新操作!", "温馨提示", function(t) {}), !1);
     }
 });

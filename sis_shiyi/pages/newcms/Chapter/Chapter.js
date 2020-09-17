@@ -1,7 +1,11 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+getApp(), require("../../../resource/js/util.js"), require("../../../resource/utils/underscore");
+
+var t = require("../../../resource/wxParse/wxParse.js"), e = require("../../../resource/function/function.js");
 
 Page({
     data: {
+        articleHidden: !0,
+        contentHidden: !1,
         datum: [],
         userInfo: [],
         sid: 0,
@@ -11,12 +15,12 @@ Page({
         floorstatus: !1
     },
     onLoad: function(t) {
-        _function.system(this), wx.setNavigationBarTitle({
+        e.system(this), wx.setNavigationBarTitle({
             title: t.name
         });
-        var e = wx.getStorageSync("userInfo");
+        var a = wx.getStorageSync("userInfo");
         this.setData({
-            userInfo: e,
+            userInfo: a,
             sid: t.sid,
             total: t.total,
             displayorder: t.displayorder
@@ -39,17 +43,29 @@ Page({
             floorstatus: !1
         });
     },
-    getDatum: function(e, t) {
-        var a = this;
-        _function.request("entry/wxapp/Serialize", {
+    showContent: function() {
+        this.setData({
+            articleHidden: !0,
+            contentHidden: !1
+        });
+    },
+    showArticle: function() {
+        this.setData({
+            articleHidden: !1,
+            contentHidden: !0
+        });
+    },
+    getDatum: function(a, s) {
+        var r = this;
+        e.request("entry/wxapp/Serialize", {
             openid: this.data.userInfo.openid,
-            displayorder: e,
-            sid: t
-        }, "", function(t) {
-            0 < t.member || t.mypay || parseInt(e) <= parseInt(t.free_chapter) ? (t.data.content && WxParse.wxParse("content", "html", t.data.content, a), 
-            a.setData({
-                datum: t.data
-            })) : _function.hint(3, "更多内容请先购买后继续阅览哦^_^!", "温馨提示！", function(t) {});
+            displayorder: a,
+            sid: s
+        }, "", function(s) {
+            0 < s.member || s.mypay || parseInt(a) <= parseInt(s.free_chapter) ? (s.data.explain2 && t.wxParse("explain2", "html", s.data.explain2, r), 
+            s.data.content && t.wxParse("content", "html", s.data.content, r), r.setData({
+                datum: s.data
+            })) : e.hint(3, "更多内容请先购买后继续阅览哦^_^!", "温馨提示！", function(t) {});
         }, this);
     },
     section: function(t) {

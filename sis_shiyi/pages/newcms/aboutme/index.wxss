@@ -336,6 +336,16 @@ image {
     transform: translateX(-50%);
 }
 
+@-webkit-keyframes fadeInUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeInUp {
     0% {
         transform: translateY(100%);
@@ -343,6 +353,16 @@ image {
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
 
@@ -753,10 +773,10 @@ video {
     text-align: left;
 }
 
-@import "../../../../wuBaseWxss/3.wxss";
+@import "../../../../wuBaseWxss/6.wxss";
 
 @font-face {
-    font-family:"iconfont";src:url(iconfont.eot?t=1516695826195-do-not-use-local-path-./fontThree.wxss&2&7);src:url(iconfont.eot?t=1516695826195#iefix-do-not-use-local-path-./fontThree.wxss&6&7) format('embedded-opentype'),url(data:application/x-font-woff;charset=utf-8;base64,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) format('woff'),url(iconfont.ttf?t=1516695826195-do-not-use-local-path-./fontThree.wxss&6&7) format('truetype'),url(iconfont.svg?t=1516695826195#iconfont-do-not-use-local-path-./fontThree.wxss&6&7) format('svg');
+    font-family:"iconfont";src:url(iconfont.eot?t=1516695826195-do-not-use-local-path-./fontThree.wxss&2&7-do-not-use-local-path-./sis_shiyi/pages/newcms/aboutme/index.wxss&816&32);src:url(iconfont.eot?t=1516695826195#iefix-do-not-use-local-path-./fontThree.wxss&6&7-do-not-use-local-path-./sis_shiyi/pages/newcms/aboutme/index.wxss&816&113) format('embedded-opentype'),url(data:application/x-font-woff;charset=utf-8;base64,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) format('woff'),url(iconfont.ttf?t=1516695826195-do-not-use-local-path-./fontThree.wxss&6&7-do-not-use-local-path-./sis_shiyi/pages/newcms/aboutme/index.wxss&816&113) format('truetype'),url(iconfont.svg?t=1516695826195#iconfont-do-not-use-local-path-./fontThree.wxss&6&7-do-not-use-local-path-./sis_shiyi/pages/newcms/aboutme/index.wxss&816&113) format('svg');
 }
 
 .iconfont {
@@ -885,6 +905,16 @@ video {
 
 .audio_gaine.active {
     animation: turn 4s linear infinite;
+}
+
+@-webkit-keyframes turn {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes turn {
@@ -1144,4 +1174,3 @@ video {
     width: 37rpx;
     height: 37rpx;
 }
-

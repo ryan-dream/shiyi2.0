@@ -1,5 +1,6 @@
 {
-    "navigationBarTitleText": "热门列表",
+    "navigationBarTitleText": "详情列表",
     "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "usingComponents": {}
 }

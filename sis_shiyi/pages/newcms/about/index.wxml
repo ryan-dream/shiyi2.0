@@ -29,7 +29,6 @@
                             </view>
                         <view class="NewiconLi iconfont icon-yanjing">{{item.clickNum?item.clickNum:item.sclickNum}}</view>
                         <view class="NewiconLi iconfont icon-dianzan" wx:if="{{item.zanNum}}">{{item.zanNum}}</view>
-                        <!-- <view class="NewiconLi  iconfont icon-icon_jiage_normal red" wx:if="{{(item.pay_money>0||item.serialize_price>0)&&is_pay}}">{{item.pay_money?item.pay_money:item.serialize_price}}</view> -->
                     </view>
                 </view>
             </view>

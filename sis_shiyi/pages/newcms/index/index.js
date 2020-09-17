@@ -1,4 +1,5 @@
-var app = getApp(), util = require("../../../resource/js/util.js"), $ = require("../../../resource/utils/underscore"), WxParse = require("../../../resource/wxParse/wxParse.js"), _function = require("../../../resource/function/function.js");
+var t = getApp(), e = (require("../../../resource/js/util.js"), require("../../../resource/utils/underscore"), 
+require("../../../resource/wxParse/wxParse.js"), require("../../../resource/function/function.js"));
 
 Page({
     data: {
@@ -16,22 +17,22 @@ Page({
         wxapp_serialize_newtitle: "",
         ios: ""
     },
-    onLoad: function(t) {
-        console.log("--e---index---:", t), _function.getMobleInfo(), this.setData({
-            ios: app.globalData.MobileSystem
-        }), _function.system(this, 1);
-        var e = decodeURIComponent(t.scene);
-        if (console.log("scene: ", e), -1 != e.indexOf("&")) {
-            var a = e.split("&");
-            wx.setStorageSync("fxid", a[0]), wx.setStorageSync("fx_pay_type", "scene"), wx.reLaunch({
-                url: "/sis_shiyi/pages/newcms/detail/index?id=" + a[1] + "&fxid=" + a[0] + "&fxtype=fx"
+    onLoad: function(a) {
+        console.log("--e---index---:", a), e.getMobleInfo(), this.setData({
+            ios: t.globalData.MobileSystem
+        }), e.system(this, 1);
+        var i = decodeURIComponent(a.scene);
+        if (console.log("scene: ", i), -1 != i.indexOf("&")) {
+            var r = i.split("&");
+            wx.setStorageSync("fxid", r[0]), wx.setStorageSync("fx_pay_type", "scene"), wx.reLaunch({
+                url: "/sis_shiyi/pages/newcms/detail/index?id=" + r[1] + "&fxid=" + r[0] + "&fxtype=fx"
             });
         }
-        "undefined" != e ? (wx.setStorageSync("fxid", e), wx.setStorageSync("fx_pay_type", "scene")) : t.fxid && t.fxtype && (wx.setStorageSync("fxid", t.fxid), 
+        "undefined" != i ? (wx.setStorageSync("fxid", i), wx.setStorageSync("fx_pay_type", "scene")) : a.fxid && a.fxtype && (wx.setStorageSync("fxid", a.fxid), 
         wx.setStorageSync("fx_pay_type", "share")), this.getDatum();
-        var i = wx.getStorageSync("music");
+        var s = wx.getStorageSync("music");
         this.setData({
-            music: i
+            music: s
         });
     },
     onPullDownRefresh: function() {
@@ -39,80 +40,80 @@ Page({
     },
     getDatum: function() {
         var a = this;
-        _function.request("entry/wxapp/Index", {}, "", function(t) {
-            if (app.globalData.msgsh = t.modules.msgsh, app.globalData.artsh = t.modules.artsh, 
-            app.globalData.vipCon = t.modules.vipCon, console.log(t), a.setData({
-                datum: t
-            }), t.modules) {
-                wx.setStorageSync("is_pay", t.modules.is_pay);
-                var e = wx.getStorageSync("is_pay");
+        e.request("entry/wxapp/Index", {}, "", function(e) {
+            if (t.globalData.msgsh = e.modules.msgsh, t.globalData.artsh = e.modules.artsh, 
+            t.globalData.vipCon = e.modules.vipCon, console.log(e), a.setData({
+                datum: e
+            }), e.modules) {
+                wx.setStorageSync("is_pay", e.modules.is_pay);
+                var i = wx.getStorageSync("is_pay");
                 a.setData({
-                    is_pay: 1 == e
+                    is_pay: 1 == i
                 }), a.setData({
-                    wxapp_article_newtitle: t.modules.wxapp_article_newtitle
+                    wxapp_article_newtitle: e.modules.wxapp_article_newtitle
                 }), a.setData({
-                    wxapp_article_hottitle: t.modules.wxapp_article_hottitle
+                    wxapp_article_hottitle: e.modules.wxapp_article_hottitle
                 }), a.setData({
-                    wxapp_serialize_newtitle: t.modules.wxapp_serialize_newtitle
+                    wxapp_serialize_newtitle: e.modules.wxapp_serialize_newtitle
                 });
             }
         }, this, "POST");
     },
     swiper: function(t) {
-        var e = t.currentTarget.dataset.appid, a = t.currentTarget.dataset.urlone.indexOf("http");
-        if (e) return wx.navigateToMiniProgram({
-            appId: e,
+        var a = t.currentTarget.dataset.appid, i = t.currentTarget.dataset.urlone.indexOf("http");
+        if (a) return wx.navigateToMiniProgram({
+            appId: a,
             path: t.currentTarget.dataset.url
         }), !1;
-        wx.getStorageSync("userInfo") || _function.getUserinfo(this), -1 == a ? wx.navigateTo({
+        wx.getStorageSync("userInfo") || e.getUserinfo(this), -1 == i ? wx.navigateTo({
             url: t.currentTarget.dataset.urlone
         }) : wx.navigateTo({
             url: "../outside/index?url=" + t.currentTarget.dataset.urlone
         });
     },
     detail: function(t) {
-        var e = t.currentTarget.dataset.id, a = t.currentTarget.dataset.authorid, i = t.currentTarget.dataset.url, r = t.currentTarget.dataset.type;
-        "music" == r && (e = wx.getStorageSync("music"));
+        var a = t.currentTarget.dataset.id, i = t.currentTarget.dataset.authorid, r = t.currentTarget.dataset.url, s = t.currentTarget.dataset.type;
+        "music" == s && (a = wx.getStorageSync("music"));
         var n = wx.getStorageSync("userInfo");
         n ? (this.setData({
             uid: n.id
-        }), this.detailTwo(e, i, r, n.id, a)) : _function.getUserinfo(this);
+        }), this.detailTwo(a, r, s, n.id, i)) : e.getUserinfo(this);
     },
-    detailTwo: function(e, a, t, i, r) {
-        if (2 == t) wx.navigateTo({
-            url: a + "?id=" + e
+    detailTwo: function(t, a, i, r, s) {
+        if (2 == i) wx.navigateTo({
+            url: a + "?id=" + t
         }); else {
             var n = wx.getStorageSync("userInfo");
-            _function.request("entry/wxapp/Judge", {
-                uid: i,
-                id: e
-            }, "", function(t) {
-                0 == t && n.author != r ? _function.hint(3, "抱歉,该文章仅限指定分组用户阅览^_^!", "温馨提示", function(t) {}) : wx.navigateTo({
-                    url: a + "?id=" + e
+            e.request("entry/wxapp/Judge", {
+                uid: r,
+                id: t
+            }, "", function(i) {
+                0 == i && n.author != s ? e.hint(3, "抱歉,该文章仅限指定分组用户阅览^_^!", "温馨提示", function(t) {}) : wx.navigateTo({
+                    url: a + "?id=" + t
                 });
             }, this);
         }
     },
     more: function(t) {
-        var e = t.currentTarget.dataset.types, a = t.currentTarget.dataset.url, i = t.currentTarget.dataset.appid, r = t.currentTarget.dataset.path, n = wx.getStorageSync("userInfo");
-        if (i) return wx.navigateToMiniProgram({
-            appId: i,
-            path: r,
+        var a = t.currentTarget.dataset.types, i = t.currentTarget.dataset.url, r = t.currentTarget.dataset.appid, s = t.currentTarget.dataset.path, n = wx.getStorageSync("userInfo");
+        if (r) return wx.navigateToMiniProgram({
+            appId: r,
+            path: s,
             success: function(t) {
                 console.log("打开成功");
             }
         }), !1;
-        n ? a || i ? wx.navigateTo({
-            url: a
+        n ? i || r ? wx.navigateTo({
+            url: i
         }) : wx.navigateTo({
-            url: "../art_list/index?types=" + e
-        }) : _function.getUserinfo(this);
+            url: "../art_list/index?types=" + a
+        }) : e.getUserinfo(this);
     },
     formSubmit: function(t) {
-        var e = t.detail.value.title;
-        if ("" == e) return _function.hint(3, "请输入关键词^_^!", "温馨提示", function(t) {}), !1;
+        var a = t.detail.value.title;
+        if ("" == a) return e.hint(3, "请输入关键词^_^!", "温馨提示", function(t) {}), !1;
         wx.navigateTo({
-            url: "../search/index?title=" + e + "&type=1"
+            url: "../search/index?title=" + a + "&type=1"
         }), this.setData({
             title: ""
         });
@@ -127,70 +128,14 @@ Page({
             path: "sis_shiyi/pages/newcms/index/index"
         };
     },
-
-  DotStyle(e) {
-    this.setData({
-      DotStyle: e.detail.value
-    })
-  },
-      // cardSwiper
-  cardSwiper(e) {
-    this.setData({
-      cardCur: e.detail.current
-    })
-  },
-  // towerSwiper
-  // 初始化towerSwiper
-  towerSwiper(name) {
-    let list = this.data[name];
-    for (let i = 0; i < list.length; i++) {
-      list[i].zIndex = parseInt(list.length / 2) + 1 - Math.abs(i - parseInt(list.length / 2))
-      list[i].mLeft = i - parseInt(list.length / 2)
+    DotStyle: function(t) {
+        this.setData({
+            DotStyle: t.detail.value
+        });
+    },
+    cardSwiper: function(t) {
+        this.setData({
+            cardCur: t.detail.current
+        });
     }
-    this.setData({
-      swiperList: list
-    })
-  },
-  // towerSwiper触摸开始
-  towerStart(e) {
-    this.setData({
-      towerStart: e.touches[0].pageX
-    })
-  },
-  // towerSwiper计算方向
-  towerMove(e) {
-    this.setData({
-      direction: e.touches[0].pageX - this.data.towerStart > 0 ? 'right' : 'left'
-    })
-  },
-  // towerSwiper计算滚动
-  towerEnd(e) {
-    let direction = this.data.direction;
-    let list = this.data.swiperList;
-    if (direction == 'right') {
-      let mLeft = list[0].mLeft;
-      let zIndex = list[0].zIndex;
-      for (let i = 1; i < list.length; i++) {
-        list[i - 1].mLeft = list[i].mLeft
-        list[i - 1].zIndex = list[i].zIndex
-      }
-      list[list.length - 1].mLeft = mLeft;
-      list[list.length - 1].zIndex = zIndex;
-      this.setData({
-        swiperList: list
-      })
-    } else {
-      let mLeft = list[list.length - 1].mLeft;
-      let zIndex = list[list.length - 1].zIndex;
-      for (let i = list.length - 1; i > 0; i--) {
-        list[i].mLeft = list[i - 1].mLeft
-        list[i].zIndex = list[i - 1].zIndex
-      }
-      list[0].mLeft = mLeft;
-      list[0].zIndex = zIndex;
-      this.setData({
-        swiperList: list
-      })
-    }
-  },
 });

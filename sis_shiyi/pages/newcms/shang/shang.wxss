@@ -45,7 +45,7 @@
     height: 120rpx;
     line-height: 120rpx;
     text-align: center;
-    border: 1rpx solid #dfb741;/*#dfb741*/
+    border: 1rpx solid #dfb741;
     color: #dfb741;
     border-radius: 10rpx;
     font-size: 36rpx;

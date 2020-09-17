@@ -1,9 +1,11 @@
-@import "../../../../wuBaseWxss/0.wxss";
+@import "../../../../wuBaseWxss/4.wxss";
 
 @import "../../../resource/wxParse/wxParse.wxss";
 
 .Chapter {
-    background: #ede7da;
+    background: #fff;
+    height: 100%;
+    margin-top: 80rpx;
 }
 
 .conBtn {
@@ -21,7 +23,7 @@
 }
 
 .Chapter .conBtn text {
-    background: #f3f0e7;
+    background: #fff;
     border: 1px solid #e2e0d4;
     display: block;
 }
@@ -36,7 +38,7 @@
 }
 
 .wxParse-p {
-    background: #ede7da!important;
+    background: #fff!important;
 }
 
 page {
@@ -75,4 +77,33 @@ page {
     border-radius: 50%;
     background-color: #07bb45;
     -webkit-background-size: 50px auto;
+}
+
+.navTab {
+    height: 80rpx;
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    position: fixed;
+    top: 0rpx;
+    z-index: 2;
+}
+
+.navItem {
+    display: inline-block;
+    background: #fff;
+    width: 30%;
+    color: #777;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 10%;
+    line-height: 47px;
+    border-bottom: 4px solid #fff;
+}
+
+.navSelected {
+    color: #e64340;
+    font-weight: bold;
+    border-bottom: 4px solid #e64340;
 }
